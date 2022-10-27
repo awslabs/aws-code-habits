@@ -1,7 +1,7 @@
 export WORKSPACE=$(shell pwd)
 export HABITS = $(WORKSPACE)
 
-include $(WORKSPACE)/.env
+include $(WORKSPACE)/tools.env
 
 include $(HABITS)/lib/make/Makefile
 include $(HABITS)/lib/make/*/Makefile
