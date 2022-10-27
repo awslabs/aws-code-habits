@@ -1,18 +1,19 @@
 .PHONY: python/install
 ## Install Python 3
 python/install:
-	@sudo apt-get -qq install --no-install-recommends --yes python3
+	@sudo apt update
+	@sudo apt install --yes python3
 
 .PHONY: python/pip/install
 ## Install Python 3 Pip
 python/pip/install: python/install
-	@python3 -m ensurepip --upgrade
-	@echo "If you are seeing any warning messages, close your VSCode/Terminal session now, open it again and make sure ${HOME}/.local/bin is in the PATH"
+	@sudo apt install --yes python3-pip
+	@pip install --upgrade pip
 
 .PHONY: python/virtualenv/install
 ## Install Python 3 virtualenv
-python/virtualenv/install: python/install
-	@python3 -m pip install --user virtualenv
+python/virtualenv/install: python/install python/pip/install
+	@sudo apt install --yes python3-venv
 
 .PHONY: python/virtualenv/init
 ## Initialize a Python 3 virtualenv in the current directory
