@@ -16,6 +16,11 @@ badges:
   workflows:
     - name: hygiene
 
+screenshots:
+  - label: screenshot-1
+    url: doc/screenshot-1.gif
+    caption: Installing AWS Code Habits
+
 title: AWS Code Habits
 
 description: A library with Make targets, Ansible playbooks, Jinja templates (and more) designed to boost common software development tasks and enhance governance.

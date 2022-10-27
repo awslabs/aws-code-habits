@@ -16,6 +16,9 @@
 
 A library with Make targets, Ansible playbooks, Jinja templates (and more) designed to boost common software development tasks and enhance governance.
 
+| ![screenshot-1](doc/screenshot-1.gif) |
+|:--:|
+| *Installing AWS Code Habits* |
 
 ## Table of Contents
 
