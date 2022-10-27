@@ -18,7 +18,7 @@ badges:
 
 screenshots:
   - label: screenshot-1
-    url: doc/screenshot-1.gif
+    url: https://user-images.githubusercontent.com/3298422/198290134-fec4a14d-8542-4b92-9cbc-d33f476e7a74.gif
     caption: Installing AWS Code Habits
 
 title: AWS Code Habits
