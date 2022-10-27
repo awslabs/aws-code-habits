@@ -60,9 +60,10 @@ You can adopt AWS Code Habits in two ways:
   Now include `dev.env` into your Makefile, for example:
   ```bash
   export WORKSPACE=$(shell pwd)
-  export HABITS = $(WORKSPACE)
+  export HABITS = $(WORKSPACE)/habits
 
-  include $(WORKSPACE)/dev.env
+  include $(WORKSPACE)/tools.env # pin the version of your tools
+  include $(WORKSPACE)/dev.env # don't store secrets in git
   include $(WORKSPACE)/dev.secrets.env # remember to add *.secrets.env to .gitignore
 
   include $(HABITS)/lib/make/Makefile
