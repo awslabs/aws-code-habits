@@ -1,0 +1,34 @@
+---
+- name: Ansible Playbook (doc/remove)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Remove doc/habits.yaml
+      file:
+        path: "{{workspace}}/doc/habits.yaml"
+        state: absent
+
+    - name: Remove doc/logo.jpg
+      file:
+        path: "{{workspace}}/doc/logo.jpg"
+        state: absent
+
+    - name: Remove CONTRIBUTING.md
+      file:
+        path: "{{workspace}}/CONTRIBUTING.md"
+        state: absent
+
+    - name: Remove CHANGELOG.md
+      file:
+        path: "{{workspace}}/CHANGELOG.md"
+        state: absent
+
+    - name: Remove CODE_OF_CONDUCT.md
+      file:
+        path: "{{workspace}}/CODE_OF_CONDUCT.md"
+        state: absent
+
+    - name: Remove SECURITY.md
+      file:
+        path: "{{workspace}}/SECURITY.md"
+        state: absent

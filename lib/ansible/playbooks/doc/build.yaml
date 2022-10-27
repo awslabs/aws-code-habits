@@ -1,0 +1,7 @@
+---
+- name: Ansible Playbook (doc/build)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Manage README.md
+      template: src={{habits}}/lib/ansible/templates/readme.j2 dest={{workspace}}/README.md

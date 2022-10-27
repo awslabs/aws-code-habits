@@ -1,0 +1,43 @@
+---
+- name: Ansible Playbook (doc/init)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Create doc/ directory
+      file:
+        path: "{{workspace}}/doc"
+        state: directory
+
+    - name: Copy habits.yaml template to doc/
+      template: src={{habits}}/lib/ansible/files/doc/habits.yaml dest={{workspace}}/doc/habits.yaml mode=644
+
+    - name: Copy default logo
+      copy:
+        src: "{{habits}}/lib/ansible/files/doc/logo.png"
+        dest: "{{workspace}}/doc/logo.png"
+        mode: "0644"
+        force: no
+
+    - name: Copy CONTRIBUTING.md
+      copy:
+        src: "{{habits}}/lib/ansible/files/doc/CONTRIBUTING.md"
+        dest: "{{workspace}}/CONTRIBUTING.md"
+        mode: "0644"
+
+    - name: Copy CHANGELOG.md
+      copy:
+        src: "{{habits}}/lib/ansible/files/doc/CHANGELOG.md"
+        dest: "{{workspace}}/CHANGELOG.md"
+        mode: "0644"
+
+    - name: Copy CODE_OF_CONDUCT.md
+      copy:
+        src: "{{habits}}/lib/ansible/files/doc/CODE_OF_CONDUCT.md"
+        dest: "{{workspace}}/CODE_OF_CONDUCT.md"
+        mode: "0644"
+
+    - name: Copy SECURITY.md
+      copy:
+        src: "{{habits}}/lib/ansible/files/doc/SECURITY.md"
+        dest: "{{workspace}}/SECURITY.md"
+        mode: "0644"

@@ -1,0 +1,19 @@
+---
+- name: Ansible Playbook (github/issues/remove)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Remove ISSUE_TEMPLATE/bug_report.md
+      file:
+        path: "{{workspace}}/.github/ISSUE_TEMPLATE/bug_report.md"
+        state: absent
+
+    - name: Remove ISSUE_TEMPLATE/feature_request.md
+      file:
+        path: "{{workspace}}/.github/ISSUE_TEMPLATE/feature_request.md"
+        state: absent
+
+    - name: Remove ISSUE_TEMPLATE/question.md
+      file:
+        path: "{{workspace}}/.github/ISSUE_TEMPLATE/question.md"
+        state: absent

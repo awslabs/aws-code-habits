@@ -1,0 +1,9 @@
+---
+- name: Ansible Playbook (aws/config/remove)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Remove AWS Config
+      file:
+        path: ~/.aws/config
+        state: absent

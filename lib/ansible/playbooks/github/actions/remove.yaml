@@ -1,0 +1,9 @@
+---
+- name: Ansible Playbook (github/actions/remove)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Remove .github/actions
+      file:
+        path: "{{workspace}}/.github/actions"
+        state: absent

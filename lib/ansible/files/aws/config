@@ -1,0 +1,12 @@
+[profile default]
+sso_start_url=https://d-xxxxxxxxxx.awsapps.com/start
+sso_region=us-east-1
+sso_account_id=xxxxxxxxxxxx
+sso_role_name=xxxxxxxxxxxx
+region=us-east-1
+output=json
+
+[profile developer]
+region=ap-southeast-1
+source_profile=default
+role_arn=arn:aws:iam::xxxxxxxxxxxx:role/my-role

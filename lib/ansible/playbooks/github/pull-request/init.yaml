@@ -1,0 +1,15 @@
+---
+- name: Ansible Playbook (github/templates/init)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Create .github directory
+      file:
+        path: "{{workspace}}/.github"
+        state: directory
+
+    - name: Copy .github/pull_request_template.md
+      copy:
+        src: "{{habits}}/lib/ansible/files/github/pull_request_template.md"
+        dest: "{{workspace}}/.github/pull_request_template.md"
+        mode: "0644"

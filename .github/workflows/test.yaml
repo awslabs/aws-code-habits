@@ -1,0 +1,54 @@
+name: Test
+on:
+  push:
+    branches:
+      - feature/*
+      - bugfix/*
+      - hotfix/*
+      - develop
+      - main
+
+jobs:
+  test:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install virtualenv
+
+      - name: Create virtualenv
+        run: python -m venv .venv
+
+      - name: Create Makefile
+        run: |
+          git init
+          echo 'export WORKSPACE=$(shell pwd)' | tee Makefile
+          echo 'export HABITS = $(WORKSPACE)/habits' | tee --append Makefile
+          echo 'include $(HABITS)/lib/make/Makefile' | tee --append Makefile
+          echo 'include $(HABITS)/lib/make/*/Makefile' | tee --append Makefile
+
+      - name: Clone repository
+        uses: actions/checkout@v3
+        with:
+          path: habits
+
+      - name: Habits Install
+        run: make habits/install
+
+      - name: Habits Init
+        run: make habits/init
+
+      - name: Generate documentation
+        run: make doc/build
+
+      - name: Habits Check
+        run: make habits/check
+
+      - name: Uninstall Habits
+        run: make habits/remove

@@ -1,0 +1,14 @@
+---
+- name: Ansible Playbook (github/actions/init)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Create .github directory
+      file:
+        path: "{{workspace}}/.github"
+        state: directory
+
+    - name: Create .github/actions directory
+      file:
+        path: "{{workspace}}/.github/actions"
+        state: directory

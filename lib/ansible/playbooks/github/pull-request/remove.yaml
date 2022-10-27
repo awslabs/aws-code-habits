@@ -1,0 +1,9 @@
+---
+- name: Ansible Playbook (github/templates/remove)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Remove .github/pull_request_template.md
+      file:
+        path: "{{workspace}}/.github/pull_request_template.md"
+        state: absent

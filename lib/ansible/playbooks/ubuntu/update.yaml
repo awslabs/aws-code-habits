@@ -1,0 +1,24 @@
+---
+- name: Ansible Playbook (ubuntu/update)
+  hosts: localhost
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: Update all packages to their latest version
+      apt:
+        name: "*"
+        state: latest
+        force_apt_get: True
+
+    - name: Upgrade the OS (apt-get dist-upgrade)
+      apt:
+        upgrade: dist
+
+    - name: Run the equivalent of "apt-get update" as a separate step
+      apt:
+        update_cache: yes
+
+    - name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600

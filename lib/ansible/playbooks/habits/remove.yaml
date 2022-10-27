@@ -1,0 +1,28 @@
+---
+- name: Ansible Playbook (habits/remove)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Remove Habits from Makefile (1/4)
+      lineinfile:
+        dest: "{{ workspace }}/Makefile"
+        state: absent
+        line: "export WORKSPACE=$(shell pwd)"
+
+    - name: Remove Habits from Makefile (2/4)
+      lineinfile:
+        dest: "{{ workspace }}/Makefile"
+        state: absent
+        line: "export HABITS = $(WORKSPACE)/habits"
+
+    - name: Remove Habits from Makefile (3/4)
+      lineinfile:
+        dest: "{{ workspace }}/Makefile"
+        state: absent
+        line: "include $(HABITS)/lib/make/Makefile"
+
+    - name: Remove Habits from Makefile (4/4)
+      lineinfile:
+        dest: "{{ workspace }}/Makefile"
+        state: absent
+        line: "include $(HABITS)/lib/make/*/Makefile"

@@ -1,0 +1,9 @@
+---
+- name: Ansible Playbook (github/workflows/remove)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Remove github/workflows
+      file:
+        path: "{{workspace}}/.github/workflows"
+        state: absent

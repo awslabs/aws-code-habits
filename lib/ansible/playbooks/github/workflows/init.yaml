@@ -1,0 +1,14 @@
+---
+- name: Ansible Playbook (github/workflows/init)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Create .github directory
+      file:
+        path: "{{workspace}}/.github"
+        state: directory
+
+    - name: Create .github/workflows directory
+      file:
+        path: "{{workspace}}/.github/workflows"
+        state: directory

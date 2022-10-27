@@ -1,0 +1,32 @@
+---
+- name: Ansible Playbook (github/issues/init)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Create .github directory
+      file:
+        path: "{{workspace}}/.github"
+        state: directory
+
+    - name: Create .github/ISSUE_TEMPLATE directory
+      file:
+        path: "{{workspace}}/.github/ISSUE_TEMPLATE"
+        state: directory
+
+    - name: Copy ISSUE_TEMPLATE/bug_report.md
+      copy:
+        src: "{{habits}}/lib/ansible/files/github/ISSUE_TEMPLATE/bug_report.md"
+        dest: "{{workspace}}/.github/ISSUE_TEMPLATE/bug_report.md"
+        mode: "0644"
+
+    - name: Copy ISSUE_TEMPLATE/feature_request.md
+      copy:
+        src: "{{habits}}/lib/ansible/files/github/ISSUE_TEMPLATE/feature_request.md"
+        dest: "{{workspace}}/.github/ISSUE_TEMPLATE/feature_request.md"
+        mode: "0644"
+
+    - name: Copy ISSUE_TEMPLATE/question.md
+      copy:
+        src: "{{habits}}/lib/ansible/files/github/ISSUE_TEMPLATE/question.md"
+        dest: "{{workspace}}/.github/ISSUE_TEMPLATE/question.md"
+        mode: "0644"

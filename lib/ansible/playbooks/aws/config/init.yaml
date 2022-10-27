@@ -1,0 +1,17 @@
+---
+- name: Ansible Playbook (aws/config/init)
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Create ~/.aws directory
+      file:
+        path: "~/.aws"
+        state: directory
+
+    # TODO: use Jinja template
+    - name: Copy AWS Config
+      copy:
+        src: "{{habits}}/lib/ansible/files/aws/config"
+        dest: ~/.aws/config
+        mode: "0644"
+        force: no
