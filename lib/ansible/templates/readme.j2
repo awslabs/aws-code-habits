@@ -124,9 +124,10 @@ This project is licensed under the {{ license }} License. See the [LICENSE](LICE
 {{ copyright }}
 {% endif %}
 
+{% if trademark is defined and trademark == "yes" %}
 ## Trademarks
-
 All other trademarks referenced herein are the property of their respective owners.
+{% endif %}
 
 [repo]: {{ url }}
 [logo]: {{ logo }}

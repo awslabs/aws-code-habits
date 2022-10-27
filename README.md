@@ -179,9 +179,6 @@ This project is licensed under the MIT-0 License. See the [LICENSE](LICENSE) fil
 ## Copyright
 Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-## Trademarks
-
-All other trademarks referenced herein are the property of their respective owners.
 
 [repo]: https://github.com/awslabs/aws-code-habits
 [logo]: doc/logo.png
