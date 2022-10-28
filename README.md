@@ -22,12 +22,18 @@ A library with Make targets, Ansible playbooks, Jinja templates (and more) desig
 
 ## Table of Contents
 
-- [Getting Started](#getting_started)
+- [Getting Started](#getting-started)
 
 - [Prerequisites](#prerequisites)
 
 
 - [Usage](#usage)
+
+- [How-Tos](#how-tos)
+  - [How to import environment variables](#how-to-import-environment-variables)
+  - [How to initialize pre-commit config](#how-to-initialize-pre-commit-config)
+  - [How to maintain documentation](#how-to-maintain-documentation)
+  - [How to expand Habits commands](#how-to-expand-habits-commands)
 
 - [Testing](#testing)
 
@@ -36,24 +42,24 @@ A library with Make targets, Ansible playbooks, Jinja templates (and more) desig
 
 You can adopt AWS Code Habits in two ways:
 
-  ### 1. Remote (using Git Submodules)
-  On a terminal, on your project root directory, execute the following on Ubuntu:
+### 1. Remote (using Git Submodules)
+On a terminal, on your project root directory, execute the following on Ubuntu:
 
-  ```bash
-  curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/remote/init.sh | bash
-  ```
+```bash
+curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/remote/init.sh | bash
+```
 
-  ### 2. Standalone (without Git Submodules)
-   On a terminal, on your project root directory, execute the following on Ubuntu:
+### 2. Standalone (without Git Submodules)
+ On a terminal, on your project root directory, execute the following on Ubuntu:
 
-  ```bash
-  curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/standalone/init.sh | bash
-  ```
+```bash
+curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/standalone/init.sh | bash
+```
 
 
 ## Prerequisites
   A list of things you need, or how to install them.
-  > At this stage, we are only supporting Linux (Ubuntu) environments (which can be obtained via WSL (Windows) or DevContainers (Mac/Linux/Windows))
+> At this stage, we are only supporting Linux (Ubuntu) environments (which can be obtained via WSL (Windows) or DevContainers (Mac/Linux/Windows))
 
 - [Ubuntu](https://en.wikipedia.org/wiki/Ubuntu) - Ubuntu is a Linux distribution based on Debian and composed mostly of free and open-source software.
 - [Python 3](https://www.python.org) - Whether you're new to programming or an experienced developer, it's easy to learn and use Python.
@@ -65,96 +71,93 @@ You can adopt AWS Code Habits in two ways:
 
 ## Usage
 
-  ```bash
-  make [tab][tab]
-  ```
+```bash
+make [tab][tab]
+```
 
-  ```bash
-  make help
-  ```
-  For more information about each [Make targets available](Makefile.md).
+```bash
+make help
+```
+For more information about each [Make targets available](Makefile.md).
 
-  ### How-Tos
-  Most common how-tos scenarios:
+## How-Tos
+Below you can learn
 
-  #### How to import environment variables
-  Create a `.env` file, example:
+### How to import environment variables
+Create a `.env` file, example:
 
-  ```bash
-  echo 'ENVIRONMENT=dev' > dev.env
-  ```
+```bash
+echo 'ENVIRONMENT=dev' > dev.env
+```
 
-  Now include `dev.env` into your Makefile, for example:
-  ```bash
-  export WORKSPACE=$(shell pwd)
-  export HABITS = $(WORKSPACE)/habits
+Now include `dev.env` into your Makefile, for example:
+```bash
+export WORKSPACE=$(shell pwd)
+export HABITS = $(WORKSPACE)/habits
 
-  include $(WORKSPACE)/tools.env # pin the version of your tools
-  include $(WORKSPACE)/dev.env # don't store secrets in git
-  include $(WORKSPACE)/dev.secrets.env # remember to add *.secrets.env to .gitignore
+include $(WORKSPACE)/tools.env # pin the version of your tools
+include $(WORKSPACE)/dev.env # don't store secrets in git
+include $(WORKSPACE)/dev.secrets.env # remember to add *.secrets.env to .gitignore
 
-  include $(HABITS)/lib/make/Makefile
-  include $(HABITS)/lib/make/*/Makefile
-  ```
+include $(HABITS)/lib/make/Makefile
+include $(HABITS)/lib/make/*/Makefile
+```
 
-  #### How to initialize `.pre-commit-config.yaml`:
+### How to initialize pre-commit config
+```bash
+make pre-commit/init
+```
 
-  ```bash
-  make pre-commit/init
-  ```
+To run all `pre-commit` rules in all files, simply run:
 
-  To run all `pre-commit` rules in all files, simply run:
+```bash
+make pre-commit/run
+```
 
-  ```bash
-  make pre-commit/run
-  ```
+### How to maintain documentation
+1. First initialize all documentation files:
+```bash
+make doc/init
+```
 
-  #### How to build documentation (powered by Ansible and Jinja templates)
-  1. First initialize all documentation files:
-  ```bash
-  make doc/init
-  ```
+This will create a folder named `doc/` in the root directory of your project and create a file named `habits.yaml` inside of it.
 
-  This will create a folder named `doc/` in the root directory of your project and create a file named `habits.yaml` inside of it.
+2. Modify the contents of `doc/habits.yaml` accordingly and execute:
 
-  2. Modify the contents of `doc/habits.yaml` accordingly and execute:
+```
+make doc/build
+```
 
-  ```
-  make doc/build
-  ```
+3. `README.md` will be rendered.
 
-  3. `README.md` will be rendered.
+### How to expand Habits commands
+You can use [Habits][habits] to meet your needs, in your `Makefile` you can add the following to ensure code and documentation hygiene:
+```bash
+.PHONY: hygiene
+hygiene: doc/build pre-commit/run
+```
 
-  #### How to expand Habits commands
+Another example, if you want to perform several tasks with `AWS CloudFormation`:
+```bash
+.PHONY: hygiene
+hygiene: aws/cloudformation/hygiene
 
-  You can use [Habits][habits] to meet your needs, in your `Makefile` you can add the following to ensure code and documentation hygiene:
-  ```bash
-  .PHONY: hygiene
-  hygiene: doc/build pre-commit/run
-  ```
+.PHONY: plan
+plan: aws/cloudformation/create-change-set
 
-  Another example, if you want to perform several tasks with `AWS CloudFormation`:
-  ```bash
-  .PHONY: hygiene
-  hygiene: aws/cloudformation/hygiene
+.PHONY: discard
+discard: aws/cloudformation/delete-change-set
 
-  .PHONY: plan
-  plan: aws/cloudformation/create-change-set
-
-  .PHONY: discard
-  discard: aws/cloudformation/delete-change-set
-
-  .PHONY: apply
-  apply: aws/cloudformation/execute-change-set
-  ```
+.PHONY: apply
+apply: aws/cloudformation/execute-change-set
+```
 
 
 ## Testing
 To perform habits checks:
-  ```bash
-  make habits/check
-  ```
-
+```bash
+make habits/check
+```
 
 
 
@@ -183,5 +186,4 @@ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 [aws-code-habits]: https://github.com/awslabs/aws-code-habits
 
-<!--  ANCHORS -->
 [habits]: https://github.com/awslabs/aws-code-habits
