@@ -50,57 +50,6 @@ You can adopt AWS Code Habits in two ways:
   curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/standalone/init.sh | bash
   ```
 
-  ### How to import environment variables
-  Create a `.env` file, example:
-
-  ```bash
-  echo 'ENVIRONMENT=dev' > dev.env
-  ```
-
-  Now include `dev.env` into your Makefile, for example:
-  ```bash
-  export WORKSPACE=$(shell pwd)
-  export HABITS = $(WORKSPACE)/habits
-
-  include $(WORKSPACE)/tools.env # pin the version of your tools
-  include $(WORKSPACE)/dev.env # don't store secrets in git
-  include $(WORKSPACE)/dev.secrets.env # remember to add *.secrets.env to .gitignore
-
-  include $(HABITS)/lib/make/Makefile
-  include $(HABITS)/lib/make/*/Makefile
-  ```
-
-  ### How to build documentation (powered by Ansible and Jinja)
-  Make your changes on [habits.yaml](doc/habits.yaml) and then execute:
-  ```bash
-  make doc/build
-  ```
-
-  All changes made on [README.md](README.md) directly will be overwritten.
-
-  ### How to incorporate Habits
-
-  You can use [Habits][habits] to meet your needs, example:
-  ```bash
-  .PHONY: hygiene
-  hygiene: doc/build pre-commit/run
-  ```
-
-  For example, you want to perform several tasks with AWS CloudFormation:
-  ```bash
-  .PHONY: hygiene
-  hygiene: aws/cloudformation/hygiene
-
-  .PHONY: plan
-  plan: aws/cloudformation/create-change-set
-
-  .PHONY: discard
-  discard: aws/cloudformation/delete-change-set
-
-  .PHONY: apply
-  apply: aws/cloudformation/execute-change-set
-  ```
-
 
 ## Prerequisites
   A list of things you need, or how to install them.
@@ -125,20 +74,30 @@ You can adopt AWS Code Habits in two ways:
   ```
   For more information about each [Make targets available](Makefile.md).
 
-  ### How to intialize all documentation files
+  ### How-Tos
+  Most common how-tos scenarios:
+
+  #### How to import environment variables
+  Create a `.env` file, example:
 
   ```bash
-  make doc/init
+  echo 'ENVIRONMENT=dev' > dev.env
   ```
 
-  This will create a folder named `doc/` in the root directory of your project and create a file named `habits.yaml` inside of it.
-  Then after modifying the contents of `doc/habits.yaml`, execute:
+  Now include `dev.env` into your Makefile, for example:
+  ```bash
+  export WORKSPACE=$(shell pwd)
+  export HABITS = $(WORKSPACE)/habits
 
-  ```
-  make doc/build
+  include $(WORKSPACE)/tools.env # pin the version of your tools
+  include $(WORKSPACE)/dev.env # don't store secrets in git
+  include $(WORKSPACE)/dev.secrets.env # remember to add *.secrets.env to .gitignore
+
+  include $(HABITS)/lib/make/Makefile
+  include $(HABITS)/lib/make/*/Makefile
   ```
 
-  ### How to initialize `.pre-commit-config.yaml`:
+  #### How to initialize `.pre-commit-config.yaml`:
 
   ```bash
   make pre-commit/init
@@ -148,6 +107,45 @@ You can adopt AWS Code Habits in two ways:
 
   ```bash
   make pre-commit/run
+  ```
+
+  #### How to build documentation (powered by Ansible and Jinja templates)
+  1. First initialize all documentation files:
+  ```bash
+  make doc/init
+  ```
+
+  This will create a folder named `doc/` in the root directory of your project and create a file named `habits.yaml` inside of it.
+
+  2. Modify the contents of `doc/habits.yaml` accordingly and execute:
+
+  ```
+  make doc/build
+  ```
+
+  3. `README.md` will be rendered.
+
+  #### How to expand Habits commands
+
+  You can use [Habits][habits] to meet your needs, in your `Makefile` you can add the following to ensure code and documentation hygiene:
+  ```bash
+  .PHONY: hygiene
+  hygiene: doc/build pre-commit/run
+  ```
+
+  Another example, if you want to perform several tasks with `AWS CloudFormation`:
+  ```bash
+  .PHONY: hygiene
+  hygiene: aws/cloudformation/hygiene
+
+  .PHONY: plan
+  plan: aws/cloudformation/create-change-set
+
+  .PHONY: discard
+  discard: aws/cloudformation/delete-change-set
+
+  .PHONY: apply
+  apply: aws/cloudformation/execute-change-set
   ```
 
 
