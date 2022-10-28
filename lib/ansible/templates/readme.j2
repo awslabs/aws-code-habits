@@ -96,7 +96,6 @@
 {% endif %}
 
 {% if contacts is defined %}
-
 ## Contact
 {% for contact in contacts %}
 - [{{ contact.name | indent(width=2) }}](mailto:{{ contact.email }})
@@ -105,14 +104,13 @@
 {% endif %}
 
 {% if references is defined %}
-
 ## References
 {% for reference in references %}
 - [{{ reference.name | indent(width=2)  }}]({{ reference.url }}) - {{ reference.description }}
 {% endfor %}
 
 {% endif %}
-- [AWS Code Habits][aws-code-habits] - Increase efficiency with a collection of Make targets, Ansible playbooks and more.
+- [AWS Code Habits][aws-code-habits] - A library with Make targets, Ansible playbooks, Jinja templates (and more) designed to boost common software development tasks and enhance governance.
 
 {% if license is defined %}
 ## License
