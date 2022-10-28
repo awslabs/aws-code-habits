@@ -1,5 +1,5 @@
 # default gitignore template rules
-GITIGNORE:=macos,windows,linux,visualstudiocode,python,node
+GITIGNORE?=macos,windows,linux,visualstudiocode,python,node
 
 .PHONY: gitignore/install
 ## Install gitignore
