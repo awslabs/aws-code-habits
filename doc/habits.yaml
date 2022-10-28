@@ -76,79 +76,76 @@ usage: |-
   ```
   For more information about each [Make targets available](Makefile.md).
 
-  ### How-Tos
-  Most common how-tos scenarios:
+how_tos:
+  - title: How to import environment variables
+    content: |-
+      Create a `.env` file, example:
 
-  #### How to import environment variables
-  Create a `.env` file, example:
+      ```bash
+      echo 'ENVIRONMENT=dev' > dev.env
+      ```
 
-  ```bash
-  echo 'ENVIRONMENT=dev' > dev.env
-  ```
+      Now include `dev.env` into your Makefile, for example:
+      ```bash
+      export WORKSPACE=$(shell pwd)
+      export HABITS = $(WORKSPACE)/habits
 
-  Now include `dev.env` into your Makefile, for example:
-  ```bash
-  export WORKSPACE=$(shell pwd)
-  export HABITS = $(WORKSPACE)/habits
+      include $(WORKSPACE)/tools.env # pin the version of your tools
+      include $(WORKSPACE)/dev.env # don't store secrets in git
+      include $(WORKSPACE)/dev.secrets.env # remember to add *.secrets.env to .gitignore
 
-  include $(WORKSPACE)/tools.env # pin the version of your tools
-  include $(WORKSPACE)/dev.env # don't store secrets in git
-  include $(WORKSPACE)/dev.secrets.env # remember to add *.secrets.env to .gitignore
+      include $(HABITS)/lib/make/Makefile
+      include $(HABITS)/lib/make/*/Makefile
+      ```
+  - title: How to initialize pre-commit config
+    content: |-
+      ```bash
+      make pre-commit/init
+      ```
 
-  include $(HABITS)/lib/make/Makefile
-  include $(HABITS)/lib/make/*/Makefile
-  ```
+      To run all `pre-commit` rules in all files, simply run:
 
-  #### How to initialize `.pre-commit-config.yaml`:
+      ```bash
+      make pre-commit/run
+      ```
+  - title: How to maintain documentation
+    content: |-
+      1. First initialize all documentation files:
+      ```bash
+      make doc/init
+      ```
 
-  ```bash
-  make pre-commit/init
-  ```
+      This will create a folder named `doc/` in the root directory of your project and create a file named `habits.yaml` inside of it.
 
-  To run all `pre-commit` rules in all files, simply run:
+      2. Modify the contents of `doc/habits.yaml` accordingly and execute:
 
-  ```bash
-  make pre-commit/run
-  ```
+      ```
+      make doc/build
+      ```
 
-  #### How to build documentation (powered by Ansible and Jinja templates)
-  1. First initialize all documentation files:
-  ```bash
-  make doc/init
-  ```
+      3. `README.md` will be rendered.
+  - title: How to expand Habits commands
+    content: |-
+      You can use [Habits][habits] to meet your needs, in your `Makefile` you can add the following to ensure code and documentation hygiene:
+      ```bash
+      .PHONY: hygiene
+      hygiene: doc/build pre-commit/run
+      ```
 
-  This will create a folder named `doc/` in the root directory of your project and create a file named `habits.yaml` inside of it.
+      Another example, if you want to perform several tasks with `AWS CloudFormation`:
+      ```bash
+      .PHONY: hygiene
+      hygiene: aws/cloudformation/hygiene
 
-  2. Modify the contents of `doc/habits.yaml` accordingly and execute:
+      .PHONY: plan
+      plan: aws/cloudformation/create-change-set
 
-  ```
-  make doc/build
-  ```
+      .PHONY: discard
+      discard: aws/cloudformation/delete-change-set
 
-  3. `README.md` will be rendered.
-
-  #### How to expand Habits commands
-
-  You can use [Habits][habits] to meet your needs, in your `Makefile` you can add the following to ensure code and documentation hygiene:
-  ```bash
-  .PHONY: hygiene
-  hygiene: doc/build pre-commit/run
-  ```
-
-  Another example, if you want to perform several tasks with `AWS CloudFormation`:
-  ```bash
-  .PHONY: hygiene
-  hygiene: aws/cloudformation/hygiene
-
-  .PHONY: plan
-  plan: aws/cloudformation/create-change-set
-
-  .PHONY: discard
-  discard: aws/cloudformation/delete-change-set
-
-  .PHONY: apply
-  apply: aws/cloudformation/execute-change-set
-  ```
+      .PHONY: apply
+      apply: aws/cloudformation/execute-change-set
+      ```
 
 testing: |-
   To perform habits checks:

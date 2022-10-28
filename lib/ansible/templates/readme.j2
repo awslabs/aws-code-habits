@@ -31,7 +31,7 @@
 ## Table of Contents
 
 {% if getting_started is defined %}
-- [Getting Started](#getting_started)
+- [Getting Started](#getting-started)
 {% endif %}
 
 {% if prerequisites is defined %}
@@ -46,6 +46,13 @@
 - [Usage](#usage)
 {% endif %}
 
+{% if how_tos is defined %}
+- [How-Tos](#how-tos)
+{% for how_to in how_tos %}
+  - [{{ how_to.title }}](#{{ how_to.title | lower | replace(" ", "-") | indent(width=4) }})
+{% endfor %}
+{% endif %}
+
 {% if testing is defined %}
 - [Testing](#testing)
 {% endif %}
@@ -57,17 +64,17 @@
 {% if getting_started is defined %}
 ## Getting Started
 
-{{ getting_started | indent(width=2) }}
+{{ getting_started }}
 
 {% endif %}
 
 ## Prerequisites
-  {{ prerequisites.content | indent(width=2) }}
+  {{ prerequisites.content }}
 
 {% if prerequisites is defined %}
 {% if prerequisites.references is defined %}
 {% for reference in prerequisites.references %}
-- [{{ reference.name | indent(width=2) }}]({{ reference.url }}) - {{ reference.description }}
+- [{{ reference.name }}]({{ reference.url }}) - {{ reference.description }}
 {% endfor %}
 {% endif %}
 {% endif %}
@@ -75,30 +82,38 @@
 
 {% if installation is defined %}
 ## Installation
-{{ installation | indent(width=2) }}
+{{ installation }}
 
 {% endif %}
 
 ## Usage
-{{ usage | indent(width=2) }}
+{{ usage }}
 
+{% if how_tos is defined %}
+## How-Tos
+Below you can learn
+
+{% for how_to in how_tos %}
+### {{ how_to.title }}
+{{ how_to.content }}
+
+{% endfor %}
+{% endif %}
 
 {% if testing is defined %}
 ## Testing
-{{ testing | indent(width=2) }}
-
+{{ testing }}
 {% endif %}
 
 {% if deployment is defined %}
 ## Deployment
-{{ deployment | indent(width=2) }}
-
+{{ deployment }}
 {% endif %}
 
 {% if contacts is defined %}
 ## Contact
 {% for contact in contacts %}
-- [{{ contact.name | indent(width=2) }}](mailto:{{ contact.email }})
+- [{{ contact.name }}](mailto:{{ contact.email }})
 {% endfor %}
 
 {% endif %}
@@ -106,7 +121,7 @@
 {% if references is defined %}
 ## References
 {% for reference in references %}
-- [{{ reference.name | indent(width=2)  }}]({{ reference.url }}) - {{ reference.description }}
+- [{{ reference.name  }}]({{ reference.url }}) - {{ reference.description }}
 {% endfor %}
 
 {% endif %}
@@ -133,7 +148,6 @@ All other trademarks referenced herein are the property of their respective owne
 [aws-code-habits]: https://github.com/awslabs/aws-code-habits
 
 {% if anchors is defined %}
-<!--  ANCHORS -->
 {% for anchor in anchors %}
 [{{ anchor.name }}]: {{ anchor.url }}
 {% endfor %}

@@ -77,6 +77,12 @@ usage: |-
   You may also link to more resources.
 
 # optional
+# how_tos:
+#   - title: How to import environment variables
+#     content: |-
+#       Lorem ipsum dolor
+
+# optional
 testing: |-
   Explain how to test the project
 
