@@ -160,7 +160,6 @@ To perform habits checks:
 
 
 
-
 ## References
 - [GNU Make](https://www.gnu.org/software/make/) - GNU Make is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
 - [Windows Subsystem for Linux (Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/install) - WSL enables you to use Linux tools, like Bash or Grep, completely integrated with Windows tools, like PowerShell or Visual Studio Code, with no need to dual-boot.
@@ -172,7 +171,7 @@ To perform habits checks:
 - [Visual Studio DevContainers](https://code.visualstudio.com/docs/devcontainers/containers) - The Visual Studio Code Dev Containers extension lets you use a Docker container as a full-featured development environment.
 - [VSCode Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) - An extension pack that lets you open any folder in a container, on a remote machine, or in WSL and take advantage of VS Code's full feature set.
 
-- [AWS Code Habits][aws-code-habits] - Increase efficiency with a collection of Make targets, Ansible playbooks and more.
+- [AWS Code Habits][aws-code-habits] - A library with Make targets, Ansible playbooks, Jinja templates (and more) designed to boost common software development tasks and enhance governance.
 
 ## License
 This project is licensed under the MIT-0 License. See the [LICENSE](LICENSE) file.

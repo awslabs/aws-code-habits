@@ -16,7 +16,7 @@ title: The project name # required
 
 # required
 description: |-
-  The project description 
+  The project description
 
 # optional
 screenshots:
@@ -110,5 +110,5 @@ trademark: no
 
 # optional
 anchors:
-  - name: sample  # required
+  - name: sample # required
     url: https:// # required
