@@ -11,13 +11,6 @@
     - name: Copy habits.yaml template to doc/
       template: src={{habits}}/lib/ansible/files/doc/habits.yaml dest={{workspace}}/doc/habits.yaml mode=644
 
-    - name: Copy default logo
-      copy:
-        src: "{{habits}}/lib/ansible/files/doc/logo.png"
-        dest: "{{workspace}}/doc/logo.png"
-        mode: "0644"
-        force: no
-
     - name: Copy CONTRIBUTING.md
       copy:
         src: "{{habits}}/lib/ansible/files/doc/CONTRIBUTING.md"
