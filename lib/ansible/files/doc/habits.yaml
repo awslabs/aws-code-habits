@@ -1,18 +1,22 @@
 url: https:// # required
+logo: https://via.placeholder.com/1280x640 # required
 
-logo: https://via.placeholder.com/200 # required
-
-badges: # optional
-  custom:
-    - title: Test
-      icon: https://
-      url: https://
-  workflows:
-    - name: hygiene # optional, needs to match filename on .github/workflows/
+# optional
+# badges:
+#   # optional
+#   custom:
+#     - title: lorem # required
+#       icon: https:// # required
+#       url: https:// # required
+#   # optional
+#   workflows:
+#     - name: hygiene # optional, needs to match filename on .github/workflows/
 
 title: The project name # required
 
-description: The project description # required
+# required
+description: |-
+  The project description 
 
 # optional
 screenshots:
@@ -31,7 +35,7 @@ getting_started: |-
 
 # required
 prerequisites:
-  # optional
+  # required
   content: |-
     A list of things you need, or how to install them.
 
@@ -84,24 +88,27 @@ testing: |-
 deployment: |-
   Explain how the project is being deployed
 
-# required
+# optional
 contacts:
-  - name: string # required
-    email: email@email.com #required
+  - name: Jon Doe # required
+    email: email@email.com # required
 
-# list | optional
+# optional
 references:
-  - name: string # required
-    description: string # required
-    url: string # required
+  - name: lorem # required
+    description: Lorem ipsum dolor sit amet # required
+    url: https:// # required
 
-# string | optional
+#  optional
 # license: MIT-0
 
-# string | optional
+#  optional
 #copyright: Copyright . All Rights Reserved.
 
-# list | optional
+# string [yes|no] | optional
+trademark: no
+
+# optional
 anchors:
-  - name: string # required
-    url: string # required
+  - name: sample  # required
+    url: https:// # required
