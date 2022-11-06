@@ -20,6 +20,7 @@ A library with Make targets, Ansible playbooks, Jinja templates (and more) desig
 |:--:|
 | *Installing AWS Code Habits* |
 
+
 ## Table of Contents
 
 - [Getting Started](#getting-started)
