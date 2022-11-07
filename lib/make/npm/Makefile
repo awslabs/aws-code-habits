@@ -1,7 +1,7 @@
 .PHONY: npm/install
 ## Install NPM
 npm/install:
-	@sudo apt update
+	@sudo apt-get update
 	@sudo apt-get install --yes npm
 
 .PHONY: npm/aws-sso-creds-helper/install

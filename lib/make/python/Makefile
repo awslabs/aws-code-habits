@@ -1,7 +1,7 @@
 .PHONY: python/install
 ## Install Python 3
 python/install:
-	@sudo apt update
+	@sudo apt-get update
 	@sudo apt-get install --yes python3
 
 .PHONY: python/pip/install
