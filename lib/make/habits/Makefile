@@ -3,8 +3,6 @@
 habits/install: \
 	gitignore/install \
 	gitignore/init \
-	python/virtualenv/install \
-	python/virtualenv/init \
 	python/pip/install \
 	ansible/install \
 	pre-commit/install
@@ -12,7 +10,6 @@ habits/install: \
 .PHONY: habits/init
 ## Initialize gitignore, documentation, pre-commit, github workflows, issues and pull-request
 habits/init: \
-	python/virtualenv/init \
 	gitignore/init \
 	doc/init \
 	pre-commit/init \
@@ -49,9 +46,6 @@ habits/submodule/remove:
 .PHONY: habits/check
 ## Performs checks
 habits/check:
-ifeq ("$(wildcard .venv)", "")
-	@echo "Directory .venv/ not found. To fix, run: make python/virtualenv/init" && exit 1
-endif
 ifeq ("$(wildcard doc)", "")
 	@echo "Directory doc/ not found. To fix, run: make doc/init" && exit 1
 endif
