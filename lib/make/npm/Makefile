@@ -2,7 +2,7 @@
 ## Install NPM
 npm/install:
 	@sudo apt update
-	@sudo apt install --yes npm
+	@sudo apt-get install --yes npm
 
 .PHONY: npm/aws-sso-creds-helper/install
 ## Install NPM package sso-creds (DevContainer)

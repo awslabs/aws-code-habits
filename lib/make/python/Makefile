@@ -2,18 +2,18 @@
 ## Install Python 3
 python/install:
 	@sudo apt update
-	@sudo apt install --yes python3
+	@sudo apt-get install --yes python3
 
 .PHONY: python/pip/install
 ## Install Python 3 Pip
 python/pip/install: python/install
-	@sudo apt install --yes python3-pip
+	@sudo apt-get install --yes python3-pip
 	@pip install --upgrade pip
 
 .PHONY: python/virtualenv/install
 ## Install Python 3 virtualenv
 python/virtualenv/install: python/install python/pip/install
-	@sudo apt install --yes python3-venv
+	@sudo apt-get install --yes python3-venv
 
 .PHONY: python/virtualenv/init
 ## Initialize a Python 3 virtualenv in the current directory
