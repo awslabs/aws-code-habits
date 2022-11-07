@@ -3,8 +3,6 @@
 habits/install: \
 	gitignore/install \
 	gitignore/init \
-	python/virtualenv/install \
-	python/virtualenv/init \
 	python/pip/install \
 	ansible/install \
 	pre-commit/install
@@ -12,7 +10,6 @@ habits/install: \
 .PHONY: habits/init
 ## Initialize gitignore, documentation, pre-commit, github workflows, issues and pull-request
 habits/init: \
-	python/virtualenv/init \
 	gitignore/init \
 	doc/init \
 	pre-commit/init \
