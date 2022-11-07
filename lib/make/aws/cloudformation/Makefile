@@ -6,7 +6,7 @@
 STACK_ENVIRONMENT_NAME ?= $(STACK_NAME_PREFIX)-$(ENVIRONMENT)
 
 # Generate random unique 4-letter identifier
-CHANGE_SET_ID:=$(shell tr -dc A-Za-z0-9 </dev/urandom | head -c 4 ; echo '')
+CHANGE_SET_ID:=$(shell openssl rand -base64 4)
 CHANGE_SET_NAME ?= $(STACK_ENVIRONMENT_NAME)-$(CHANGE_SET_ID)
 
 .PHONY: aws/cloudformation/assert/variables
