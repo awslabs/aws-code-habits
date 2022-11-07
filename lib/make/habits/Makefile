@@ -46,9 +46,6 @@ habits/submodule/remove:
 .PHONY: habits/check
 ## Performs checks
 habits/check:
-ifeq ("$(wildcard .venv)", "")
-	@echo "Directory .venv/ not found. To fix, run: make python/virtualenv/init" && exit 1
-endif
 ifeq ("$(wildcard doc)", "")
 	@echo "Directory doc/ not found. To fix, run: make doc/init" && exit 1
 endif
