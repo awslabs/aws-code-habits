@@ -1,7 +1,35 @@
-# INFRASTRUCTURE: dir name under infrastructure/, e.g.: my-project
-# TEMPLATE: under $INFRASTRUCTURE, CloudFormation template filename, e.g.: elasticsearch.yml
-# STACK_NAME_PREFIX: CloudFormation stack name prefix, e.g.:ias-my-project
-# ENVIRONMENT: Environment to which resources belong to, e.g.: dev
+# Expected folder structure
+# └── infrastructure
+#     └── mystack
+#         ├── parameters
+#         │   └── dev.json
+#         └── template.yml
+
+.PHONY: aws/cloudformation/create-folder-structure
+## Create a folder structure for CloudFormation projects
+aws/cloudformation/create-folder-structure:
+	$(call assert-set,STACK_NAME_PREFIX)
+	@mkdir -p infrastructure/$(STACK_NAME_PREFIX)/parameters
+
+.PHONY: aws/cloudformation/create-template-yaml
+## Copy a CloudFormation template to be used as example
+aws/cloudformation/create-template-yaml:
+	$(call assert-set,STACK_NAME_PREFIX)
+	@cp $(HABITS)/files/aws/cloudformation/template.yml infrastructure/$(STACK_NAME_PREFIX)/template.yml
+
+.PHONY: aws/cloudformation/create-parameters
+## Copy a CloudFormation parameters to be used as example
+aws/cloudformation/create-parameters:
+	$(call assert-set,STACK_NAME_PREFIX)
+	$(call assert-set,ENVIRONMENT)
+	@cp $(HABITS)/files/aws/cloudformation/parameters.json infrastructure/$(STACK_NAME_PREFIX)/parameters/$(ENVIRONMENT).json
+
+.PHONY: aws/cloudformation/create-project
+## Create a CloudFormation project structure
+aws/cloudformation/create-project: \
+	aws/cloudformation/create-folder-structure \
+	aws/cloudformation/create-template-yaml \
+	aws/cloudformation/create-parameters \
 
 STACK_ENVIRONMENT_NAME ?= $(STACK_NAME_PREFIX)-$(ENVIRONMENT)
 
