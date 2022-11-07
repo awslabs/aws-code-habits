@@ -1,39 +1,9 @@
-#
-# Helpers - stuff that's shared between make files
-#
-
-EDITOR ?= vim
-
 DEFAULT_HELP_TARGET ?= help/clean
 HELP_FILTER ?= .*help
 
 green = $(shell echo -e '\x1b[32;01m$1\x1b[0m')
 yellow = $(shell echo -e '\x1b[33;01m$1\x1b[0m')
 red = $(shell echo -e '\x1b[33;31m$1\x1b[0m')
-
-# Ensures that a variable is defined and non-empty
-define assert-set
-	@$(if $($(1)),,$(error $(1) not defined in $(@)))
-endef
-
-# Ensures that a variable is undefined
-define assert-unset
-	@$(if $($1),$(error $(1) should not be defined in $(@)),)
-endef
-
-test/assert-set:
-	$(call assert-set,PATH)
-	@echo assert-set PASS
-
-test/assert-unset:
-	$(call assert-unset,PATH)
-	@echo assert-unset PASS
-
-test/assert: test/assert-set test/assert-unset
-	@exit 0
-
-default:: $(DEFAULT_HELP_TARGET)
-	@exit 0
 
 ## Help screen
 help/clean:
@@ -82,3 +52,6 @@ help/generate-no-colour:
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST) | sort -u
 	@printf "\n"
+
+default:: $(DEFAULT_HELP_TARGET)
+	@exit 0
