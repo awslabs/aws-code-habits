@@ -102,11 +102,8 @@ aws/cloudformation/delete/service-linked-role:
 ## Execute CFN Lint and pre-commit rules
 aws/cloudformation/hygiene:
 	$(call assert-set,INFRASTRUCTURE)
-	@( \
-		. $(WORKSPACE)/.venv/bin/activate ;\
-		cfn-lint infrastructure/$(INFRASTRUCTURE)/*.yml ;\
-		$(MAKE) --no-print-directory pre-commit/run ;\
-	)
+	@cfn-lint infrastructure/$(INFRASTRUCTURE)/*.yml
+	@$(MAKE) --no-print-directory pre-commit/run
 
 .PHONY: aws/cloudformation/create-change-set
 ## Creates a list of changes that will be applied to a stack so that you can review the changes before executing them.

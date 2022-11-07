@@ -32,11 +32,8 @@ python/virtualenv/remove:
 .PHONY: python/version
 ## Display Python & Pip version
 python/version:
-	@( \
-		. $(WORKSPACE)/.venv/bin/activate ;\
-		echo "--- PYTHON 3 ---" ;\
-		python3 --version ;\
-		echo "--- PIP ---" ;\
-		python3 -m pip --version ;\
-		python3 -m pip freeze ;\
-	)
+	@echo "--- PYTHON 3 ---"
+	@python3 --version
+	@echo "--- PIP ---"
+	@pip --version
+	@pip freeze
