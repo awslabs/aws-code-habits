@@ -41,20 +41,31 @@ A library with Make targets, Ansible playbooks, Jinja templates (and more) desig
 
 ## Getting Started
 
-You can adopt AWS Code Habits in two ways:
+You can adopt AWS Code Habits in several ways.
+On a terminal, on your project's root directory, execute one of the following commands:
 
-### 1. Remote (using Git Submodules)
-On a terminal, on your project root directory, execute the following on Ubuntu:
+### 1. Remote (using Git Submodules, initialize all files)
 
 ```bash
 curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/remote/init.sh | bash
 ```
 
-### 2. Standalone (without Git Submodules)
- On a terminal, on your project root directory, execute the following on Ubuntu:
+### 2. Remote (using Git Submodules, installation only)
+
+```bash
+curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/remote/install.sh | bash
+```
+
+### 3. Standalone (without Git Submodules, initialize all files)
 
 ```bash
 curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/standalone/init.sh | bash
+```
+
+### 4. Standalone (without Git Submodules, installation only)
+
+```bash
+curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/standalone/install.sh | bash
 ```
 
 
