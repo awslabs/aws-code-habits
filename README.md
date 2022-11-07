@@ -62,11 +62,8 @@ curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/
   A list of things you need, or how to install them.
 > At this stage, we are only supporting Linux (Ubuntu) environments (which can be obtained via WSL (Windows) or DevContainers (Mac/Linux/Windows))
 
-- [Ubuntu](https://en.wikipedia.org/wiki/Ubuntu) - Ubuntu is a Linux distribution based on Debian and composed mostly of free and open-source software.
 - [Python 3](https://www.python.org) - Whether you're new to programming or an experienced developer, it's easy to learn and use Python.
-- [Python Virtual Environment](https://docs.python.org/3/library/venv.html) - A virtual environment is created on top of an existing Python installation, known as the virtual environment’s “base” Python, and may optionally be isolated from the packages in the base environment, so only those explicitly installed in the virtual environment are available.
-- [Ansible](https://www.ansible.com/) - Ansible is an open source community project sponsored by Red Hat, it's the simplest way to automate IT.
-- [Jinja2](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html) - Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts.
+- [Pip](https://pypi.org/project/pip/) - pip is the package installer for Python.
 
 
 
@@ -172,6 +169,8 @@ make habits/check
 - [Visual Studio Code](https://code.visualstudio.com/) - Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications.
 - [Visual Studio DevContainers](https://code.visualstudio.com/docs/devcontainers/containers) - The Visual Studio Code Dev Containers extension lets you use a Docker container as a full-featured development environment.
 - [VSCode Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) - An extension pack that lets you open any folder in a container, on a remote machine, or in WSL and take advantage of VS Code's full feature set.
+- [Ansible](https://www.ansible.com/) - Ansible is an open source community project sponsored by Red Hat, it's the simplest way to automate IT.
+- [Jinja2](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html) - Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts.
 
 - [AWS Code Habits][aws-code-habits] - A library with Make targets, Ansible playbooks, Jinja templates (and more) designed to boost common software development tasks and enhance governance.
 

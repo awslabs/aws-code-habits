@@ -48,21 +48,12 @@ prerequisites:
     > At this stage, we are only supporting Linux (Ubuntu) environments (which can be obtained via WSL (Windows) or DevContainers (Mac/Linux/Windows))
 
   references:
-    - name: Ubuntu
-      description: Ubuntu is a Linux distribution based on Debian and composed mostly of free and open-source software.
-      url: https://en.wikipedia.org/wiki/Ubuntu
     - name: Python 3
       description: Whether you're new to programming or an experienced developer, it's easy to learn and use Python.
       url: https://www.python.org
-    - name: Python Virtual Environment
-      description: A virtual environment is created on top of an existing Python installation, known as the virtual environment’s “base” Python, and may optionally be isolated from the packages in the base environment, so only those explicitly installed in the virtual environment are available.
-      url: https://docs.python.org/3/library/venv.html
-    - name: Ansible
-      description: Ansible is an open source community project sponsored by Red Hat, it's the simplest way to automate IT.
-      url: https://www.ansible.com/
-    - name: Jinja2
-      description: Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts.
-      url: https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html
+    - name: Pip
+      description: pip is the package installer for Python.
+      url: https://pypi.org/project/pip/
 
 # required
 usage: |-
@@ -181,6 +172,12 @@ references:
   - name: VSCode Remote Development Extension Pack
     description: An extension pack that lets you open any folder in a container, on a remote machine, or in WSL and take advantage of VS Code's full feature set.
     url: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack
+  - name: Ansible
+    description: Ansible is an open source community project sponsored by Red Hat, it's the simplest way to automate IT.
+    url: https://www.ansible.com/
+  - name: Jinja2
+    description: Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts.
+    url: https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html
 
 license: MIT-0
 
