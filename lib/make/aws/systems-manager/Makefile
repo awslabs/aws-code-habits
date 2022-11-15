@@ -11,7 +11,7 @@ aws/ssm/install-plugin:
 ## Start session with AWS Systems Manager Session Manager
 aws/ssm/start-session:
 	$(call assert-set,INSTANCE_ID)
-	aws ssm start-session --target $(INSTANCE_ID)
+	aws --profile $(AWS_PROFILE) ssm start-session --target $(INSTANCE_ID)
 
 .PHONY: aws/ssm/port-forwarding
 aws/ssm/port-forwarding:
@@ -19,11 +19,11 @@ aws/ssm/port-forwarding:
 	$(call assert-set,ENDPOINT)
 	$(call assert-set,REMOTE_PORT)
 	$(call assert-set,LOCAL_PORT)
-	aws ssm start-session --target $(INSTANCE_ID) --document-name AWS-StartPortForwardingSessionToRemoteHost --parameters "{\"host\":[\"$(ENDPOINT)\"],\"portNumber\":[\"$(REMOTE_PORT)\"],\"localPortNumber\":[\"$(LOCAL_PORT)\"]}"
+	aws --profile $(AWS_PROFILE) ssm start-session --target $(INSTANCE_ID) --document-name AWS-StartPortForwardingSessionToRemoteHost --parameters "{\"host\":[\"$(ENDPOINT)\"],\"portNumber\":[\"$(REMOTE_PORT)\"],\"localPortNumber\":[\"$(LOCAL_PORT)\"]}"
 
 .PHONY: aws/ssm/list-bastion-instances
 aws/ssm/list-bastion-instances:
-	aws ec2 describe-instances \
+	aws --profile $(AWS_PROFILE) ec2 describe-instances \
 		--filter "Name=tag:bastion,Values=true" \
 		--query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" \
 		--output text
