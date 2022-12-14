@@ -1,6 +1,9 @@
 # default gitignore template rules
 GITIGNORE?=macos,windows,linux,visualstudiocode,python,node
 
+# add local persistent gitignore additions here
+GITIGNORE_LOCAL_FILE?=.gitignore_local
+
 .PHONY: gitignore/install
 ## Install gitignore
 gitignore/install:
@@ -16,3 +19,6 @@ gitignore/list:
 ## Create .gitignore file
 gitignore/init:
 	@gitignore $(GITIGNORE) > .gitignore
+	if [ -f $(GITIGNORE_LOCAL_FILE) ]; then
+		cat $(GITIGNORE_LOCAL_FILE) >> .gitignore
+	fi
