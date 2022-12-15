@@ -2,7 +2,6 @@
 ## Install Habits dependencies
 habits/install: \
 	gitignore/install \
-	gitignore/init \
 	python/pip/install \
 	ansible/install \
 	pre-commit/install
