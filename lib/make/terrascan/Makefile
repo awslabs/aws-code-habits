@@ -12,7 +12,7 @@ terrascan/install:
 	&& sudo mv /tmp/extract/terrascan /usr/local/bin/ \
 	&& rm -rf /tmp/download /tmp/extract
 	@echo "terrascan installed successfully!"
-	@$(MAKE) --no-print-directory gomplate/version
+	@$(MAKE) --no-print-directory terrascan/version
 
 .PHONY: terrascan/run
 ## Run Terrascan
