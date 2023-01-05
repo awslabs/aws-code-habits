@@ -6,6 +6,10 @@
 checkov/run:
 	checkov --directory .
 
+.PHONY: checkov/install
+checkov/install:
+	@pip3 install --upgrade --user checkov
+
 .PHONY: checkov/version
 ## Display checkov version
 checkov/version:
