@@ -9,7 +9,6 @@ tflint/install:
 	@echo "tflint installed successfully!"
 	@$(MAKE) --no-print-directory tflint/version
 
-
 .PHONY: tflint/init
 ## Init AWS TFLINT
 tflint/init:
