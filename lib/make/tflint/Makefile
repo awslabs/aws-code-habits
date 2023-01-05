@@ -19,6 +19,11 @@ ifeq ($(wildcard $(WORKSPACE)/.tflint.hcl),)
 	@tflint --init
 endif
 
+.PHONY: tflint/run
+## Run TFLINT
+tflint/run:
+	@tflint .
+
 .PHONY: tflint/version
 ## Display TFLINT version
 tflint/version:
