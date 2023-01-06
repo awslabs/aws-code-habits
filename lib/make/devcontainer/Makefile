@@ -13,6 +13,8 @@ devcontainer/terraform/init: devcontainer/init
 		aws/cli/install/v2 \
 		aws/cli/autocomplete \
 		terraform/install \
+		terraform-docs/install \
+		checkov/install \
 		tflint/install \
 		tfsec/install \
 		tfswitch/install \
