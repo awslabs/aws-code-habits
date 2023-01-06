@@ -21,6 +21,7 @@
           - make
           - nodejs
           - openssh-server
+          - pre-commit
           - python3-pip
           - software-properties-common
           - ssh
