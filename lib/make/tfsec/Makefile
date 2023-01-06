@@ -4,6 +4,7 @@
 TFSEC_VERSION?=1.15.2
 
 .PHONY: tfsec/install
+## Install TFSEC
 tfsec/install:
 	@mkdir -p /tmp/download \
 	&& wget https://github.com/aquasecurity/tfsec/releases/download/v$(TFSEC_VERSION)/tfsec-linux-amd64 -O /tmp/download/tfsec --quiet --no-check-certificate \

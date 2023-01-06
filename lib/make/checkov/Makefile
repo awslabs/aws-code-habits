@@ -7,6 +7,7 @@ checkov/run:
 	checkov --directory .
 
 .PHONY: checkov/install
+## Install Checkov
 checkov/install:
 	@pip3 install --upgrade --user checkov
 

@@ -4,6 +4,7 @@
 TERRASCAN_VERSION?=1.13.2
 
 .PHONY: terrascan/install
+## Install terrascan
 terrascan/install:
 	@mkdir -p /tmp/download /tmp/extract \
 	&& wget https://github.com/accurics/terrascan/releases/download/v$(TERRASCAN_VERSION)/terrascan_$(TERRASCAN_VERSION)_Linux_x86_64.tar.gz -O /tmp/download/terrascan_$(TERRASCAN_VERSION)_Linux_x86_64.tar.gz --quiet --no-check-certificate \

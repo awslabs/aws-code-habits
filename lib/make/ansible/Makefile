@@ -1,4 +1,5 @@
 .PHONY: ansible/install
+## Install Ansible
 ansible/install:
 	@sudo apt update
 	@sudo apt install --yes software-properties-common

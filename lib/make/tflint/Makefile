@@ -4,6 +4,7 @@
 TFLINT_AWS_RULESET_VERSION?=0.13.4
 
 .PHONY: tflint/install
+## Install TFLINT
 tflint/install:
 	@curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
 	@echo "tflint installed successfully!"
