@@ -1,6 +1,9 @@
 .PHONY: ansible/install
 ansible/install:
-	@pip install --upgrade ansible
+	@sudo apt update
+	@sudo apt install --yes software-properties-common
+	@sudo add-apt-repository --yes --update ppa:ansible/ansible
+	@sudo apt install --yes ansible
 
 .PHONY: ansible/playbooks/aws/config/init
 ansible/playbooks/aws/config/init:
@@ -57,6 +60,10 @@ ansible/playbooks/github/workflows/init:
 .PHONY: ansible/playbooks/github/workflows/remove
 ansible/playbooks/github/workflows/remove:
 	@cd $(HABITS)/lib/ansible && ansible-playbook playbooks/github/workflows/remove.yaml --extra-vars="workspace=$(WORKSPACE) habits=$(HABITS)"
+
+.PHONY: ansible/playbooks/ubuntu/install
+ansible/playbooks/ubuntu/install:
+	@cd $(HABITS)/lib/ansible && ansible-playbook playbooks/ubuntu/install.yaml
 
 .PHONY: ansible/playbooks/ubuntu/update
 ansible/playbooks/ubuntu/update:
