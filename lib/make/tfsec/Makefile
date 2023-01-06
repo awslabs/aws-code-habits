@@ -1,7 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-TFSEC_VERSION=1.15.2
+TFSEC_VERSION?=1.15.2
 
 .PHONY: tfsec/install
 tfsec/install:
