@@ -1,9 +1,6 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-export TERRAFORM_DOCS_YAML ?= $(WORKSPACE)/doc/.terraform-docs.yaml
-export TERRAFORM_DOCS_OUTPUT ?= $(WORKSPACE)/doc/terraform-docs.md
-
 TERRAFORM_DOCS_VERSION?=0.16.0
 
 .PHONY: terraform-docs/install
