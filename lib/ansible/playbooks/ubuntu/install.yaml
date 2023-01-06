@@ -1,0 +1,32 @@
+---
+- name: Ansible Playbook (ubuntu/install)
+  hosts: localhost
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: Install a list of packages
+      ansible.builtin.apt:
+        pkg:
+          - bash-completion
+          - ca-certificates
+          - curl
+          - expect
+          - figlet
+          - gawk
+          - git
+          - gnupg
+          - gnupg2
+          - jq
+          - less
+          - make
+          - nodejs
+          - openssh-server
+          - pre-commit
+          - python3-pip
+          - software-properties-common
+          - ssh
+          - tree
+          - tzdata
+          - unzip
+          - vim
+          - wget

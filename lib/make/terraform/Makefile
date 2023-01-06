@@ -1,6 +1,14 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
+.PHONY: terraform/install
+## Install Terraform latest version
+terraform/install:
+	wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg >/dev/null
+	echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(shell lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+	sudo apt-get update && sudo apt-get -qq install --no-install-recommends --yes terraform terraform-ls
+	@$(MAKE) --no-print-directory terraform/version
+
 .PHONY: terraform/init
 ## Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
 terraform/init: tfswitch/run terraform/fmt tflint/run

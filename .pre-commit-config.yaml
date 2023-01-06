@@ -30,7 +30,7 @@ repos:
       - id: detect-private-key
       # Ensures that a file is either empty, or ends with one newline.
       - id: end-of-file-fixer
-        exclude: README.md
+        exclude: README.md|CHANGELOG.md
       # Replaces or checks mixed line ending
       - id: mixed-line-ending
         args: ["--fix=lf"]
@@ -49,3 +49,4 @@ repos:
     rev: "v3.0.0-alpha.4"
     hooks:
       - id: prettier
+        exclude: CHANGELOG.md

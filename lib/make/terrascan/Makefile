@@ -1,7 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-TERRASCAN_VERSION=1.13.2
+TERRASCAN_VERSION?=1.13.2
 
 .PHONY: terrascan/install
 terrascan/install:
