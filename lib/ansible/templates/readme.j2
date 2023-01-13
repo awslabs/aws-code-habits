@@ -124,9 +124,8 @@ Below you can learn
 {% for reference in references %}
 - [{{ reference.name  }}]({{ reference.url }}) - {{ reference.description }}
 {% endfor %}
-
 {% endif %}
-- [AWS Code Habits][aws-code-habits] - A library with Make targets, Ansible playbooks, Jinja templates (and more) designed to boost common software development tasks and enhance governance.
+
 
 {% if license is defined %}
 ## License
@@ -145,8 +144,6 @@ All other trademarks referenced herein are the property of their respective owne
 
 [repo]: {{ url }}
 [logo]: {{ logo }}
-
-[aws-code-habits]: https://github.com/awslabs/aws-code-habits
 
 {% if anchors is defined %}
 {% for anchor in anchors %}
