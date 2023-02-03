@@ -41,8 +41,16 @@ A library with Make targets, Ansible playbooks, Jinja templates (and more) desig
 
 ## Getting Started
 
-You can adopt AWS Code Habits in several ways.
+AWS Code Habits was developed to be used as a [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
 On a terminal, on your project's root directory, execute one of the following commands:
+
+```bash
+git submodule add --name habits -b main https://github.com/awslabs/aws-code-habits.git habits
+```
+This will clone AWS Code Habits on a folder named `habits` and track against the `main` branch.
+
+However, if you are looking for some automation, please see the different scripts below:
 
 ### 1. Remote (using Git Submodules, initialize all files)
 
@@ -57,12 +65,14 @@ curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/
 ```
 
 ### 3. Standalone (without Git Submodules, initialize all files)
+If you are not a big fan of Git Submodule:
 
 ```bash
 curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/standalone/init.sh | bash
 ```
 
 ### 4. Standalone (without Git Submodules, installation only)
+If you are not a big fan of Git Submodule:
 
 ```bash
 curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/standalone/install.sh | bash
@@ -183,7 +193,6 @@ make habits/check
 - [Ansible](https://www.ansible.com/) - Ansible is an open source community project sponsored by Red Hat, it's the simplest way to automate IT.
 - [Jinja2](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html) - Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts.
 
-- [AWS Code Habits][aws-code-habits] - A library with Make targets, Ansible playbooks, Jinja templates (and more) designed to boost common software development tasks and enhance governance.
 
 ## License
 This project is licensed under the MIT-0 License. See the [LICENSE](LICENSE) file.
@@ -194,7 +203,5 @@ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 [repo]: https://github.com/awslabs/aws-code-habits
 [logo]: doc/logo.png
-
-[aws-code-habits]: https://github.com/awslabs/aws-code-habits
 
 [habits]: https://github.com/awslabs/aws-code-habits
