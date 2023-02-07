@@ -1,11 +1,11 @@
 .PHONY: pre-commit/install
 ## Install pre-commit using Pip3
-pre-commit/install: python/pip/install
+pre-commit/install:
 	@pip3 install --progress-bar off --upgrade --user pre-commit
 
 .PHONY: pre-commit/hooks/install
 ## Install pre-commit hooks
-pre-commit/hooks/install: python/pip/install pre-commit/install
+pre-commit/hooks/install: pre-commit/install
 	@pre-commit install
 
 .PHONY: pre-commit/update
