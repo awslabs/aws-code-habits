@@ -48,6 +48,7 @@ On a terminal, on your project's root directory, execute one of the following co
 ```bash
 git submodule add --name habits -b main https://github.com/awslabs/aws-code-habits.git habits
 ```
+
 This will clone AWS Code Habits on a folder named `habits` and track against the `main` branch.
 Now, you will need to create, or add to your existing, `Makefile`.
 
@@ -59,7 +60,13 @@ include $(HABITS)/lib/make/Makefile
 include $(HABITS)/lib/make/*/Makefile
 ```
 
-Check the [scripts](scripts/) directory, if you want to automate the initialization and installation of AWS Code Habits.
+Remember, next time you need to clone your repository, you will need to include `--recurse-submodules` parameters.
+```bash
+git clone --recurse-submodules ...
+```
+> If you already cloned the project and forgot `--recurse-submodules`, you can combine the `git submodule init` and `git submodule update` steps by running `git submodule update --init`. To also initialize, fetch and checkout any nested submodules, you can use the foolproof `git submodule update --init --recursive`. - [Git Tools Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+
+Check the [scripts](scripts/) directory, if you want to automate the initialization and installation of AWS Code Habits.`
 
 
 ## Prerequisites
