@@ -49,34 +49,17 @@ On a terminal, on your project's root directory, execute one of the following co
 git submodule add --name habits -b main https://github.com/awslabs/aws-code-habits.git habits
 ```
 This will clone AWS Code Habits on a folder named `habits` and track against the `main` branch.
-
-However, if you are looking for some automation, please see the different scripts below:
-
-### 1. Remote (using Git Submodules, initialize all files)
+Now, you will need to create, or add to your existing, `Makefile`.
 
 ```bash
-curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/remote/init.sh | bash
+export WORKSPACE=$(shell pwd)
+export HABITS = $(WORKSPACE)/habits
+
+include $(HABITS)/lib/make/Makefile
+include $(HABITS)/lib/make/*/Makefile
 ```
 
-### 2. Remote (using Git Submodules, installation only)
-
-```bash
-curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/remote/install.sh | bash
-```
-
-### 3. Standalone (without Git Submodules, initialize all files)
-If you are not a big fan of Git Submodule:
-
-```bash
-curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/standalone/init.sh | bash
-```
-
-### 4. Standalone (without Git Submodules, installation only)
-If you are not a big fan of Git Submodule:
-
-```bash
-curl -sL https://raw.githubusercontent.com/awslabs/aws-code-habits/main/scripts/standalone/install.sh | bash
-```
+Check the [scripts](scripts/) directory, if you want to automate the initialization and installation of AWS Code Habits.
 
 
 ## Prerequisites
