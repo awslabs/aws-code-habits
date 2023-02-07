@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.0](https://github.com/awslabs/aws-code-habits/compare/v1.1.0...v1.2.0) (2023-02-03)
+
+
+### Features
+
+* make references optional ([09c1a79](https://github.com/awslabs/aws-code-habits/commit/09c1a79537dc00df567a4d9bc08aede14ba0bbe4))
+
 ## [1.1.0](https://github.com/awslabs/aws-code-habits/compare/v1.0.0...v1.1.0) (2023-01-06)
 
 
