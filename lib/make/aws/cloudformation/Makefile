@@ -29,7 +29,7 @@ aws/cloudformation/create-parameters:
 aws/cloudformation/create-project: \
 	aws/cloudformation/create-folder-structure \
 	aws/cloudformation/create-template-yaml \
-	aws/cloudformation/create-parameters \
+	aws/cloudformation/create-parameters
 
 STACK_ENVIRONMENT_NAME ?= $(STACK_NAME_PREFIX)-$(ENVIRONMENT)
 
@@ -108,12 +108,12 @@ aws/cloudformation/create-stack-without-parameters: aws/cloudformation/assert/va
 ## Creates  an  IAM  role that is linked to a specific Amazon Elasticsearch service.
 aws/cloudformation/create/service-linked-role:
 	$(call assert-set,SERVICE_NAME)
-	aws iam create-service-linked-role --aws-service-name $(SERVICE_NAME)
+	@aws iam create-service-linked-role --aws-service-name $(SERVICE_NAME)
 
 .PHONY: aws/cloudformation/describe-stack-events
 ## Returns  all  stack  related  events  for  a specified stack in reverse chronological order.
 aws/cloudformation/describe-stack-events: aws/cloudformation/assert/variables
-	aws --profile $(AWS_PROFILE) cloudformation describe-stack-events --stack-name $(STACK_ENVIRONMENT_NAME)
+	@aws --profile $(AWS_PROFILE) cloudformation describe-stack-events --stack-name $(STACK_ENVIRONMENT_NAME)
 
 .PHONY: aws/cloudformation/describe-stack
 ## Returns  the  description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.
@@ -124,7 +124,7 @@ aws/cloudformation/describe-stack: aws/cloudformation/assert/variables
 ## Deletes  an  IAM  role that is linked to a specific Amazon Web Services service.
 aws/cloudformation/delete/service-linked-role:
 	$(call assert-set,SERVICE_NAME)
-	aws iam delete-service-linked-role --role-name $(SERVICE_NAME)
+	@aws iam delete-service-linked-role --role-name $(SERVICE_NAME)
 
 .PHONY: aws/cloudformation/hygiene
 ## Execute CFN Lint and pre-commit rules
@@ -169,7 +169,7 @@ aws/cloudformation/show-latest-change-set:
 .PHONY: aws/cloudformation/create-change-set-without-parameters
 ## Creates a list of changes that will be applied to a stack so that you can review the changes before executing them.
 aws/cloudformation/create-change-set-without-parameters: aws/cloudformation/assert/variables-without-parameters
-	@ echo "Creating Change Set $(CHANGE_SET_NAME)"
+	@echo "Creating Change Set $(CHANGE_SET_NAME)"
 	@aws --profile $(AWS_PROFILE) cloudformation create-change-set \
 		--stack-name $(STACK_ENVIRONMENT_NAME) \
 		--template-body file://infrastructure/$(INFRASTRUCTURE)/$(TEMPLATE).yml \
@@ -184,7 +184,7 @@ aws/cloudformation/create-change-set-without-parameters: aws/cloudformation/asse
 .PHONY: aws/cloudformation/delete-change-set
 ## Delete latest change-set created
 aws/cloudformation/delete-change-set: aws/cloudformation/assert/variables
-	@ echo "Deleting latest Change Set"
+	@echo "Deleting latest Change Set"
 	@$(MAKE) --no-print-directory aws/cloudformation/latest-change-set \
 	| xargs aws --profile $(AWS_PROFILE) cloudformation delete-change-set --stack-name $(STACK_ENVIRONMENT_NAME) --change-set-name
 
@@ -217,7 +217,7 @@ aws/cloudformation/estimate-template-cost: aws/cloudformation/assert/variables
 .PHONY: aws/cloudformation/detect-stack-drift
 ## Detects  whether a stack's actual configuration differs, or has drifted , from it's expected configuration, as defined in  the  stack  template and  any  values specified as template parameters.
 aws/cloudformation/detect-stack-drift: aws/cloudformation/assert/variables
-	aws/cloudformation/aws --profile $(AWS_PROFILE) cloudformation detect-stack-drift \
+	@aws/cloudformation/aws --profile $(AWS_PROFILE) cloudformation detect-stack-drift \
 		--stack-name $(STACK_ENVIRONMENT_NAME) \
 
 .PHONY: aws/cloudformation/validate-template
