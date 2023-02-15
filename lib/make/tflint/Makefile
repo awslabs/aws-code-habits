@@ -14,16 +14,16 @@ tflint/install:
 ## Init AWS TFLINT
 tflint/init:
 ifeq ($(wildcard $(WORKSPACE)/.tflint.hcl),)
-	cp $(HABITS)/files/.tflint.hcl $(WORKSPACE)/.tflint.hcl
-	sed -i "s,TFLINT_AWS_RULESET_VERSION,$(TFLINT_AWS_RULESET_VERSION),g" $(WORKSPACE)/.tflint.hcl
+	@cp $(HABITS)/files/.tflint.hcl $(WORKSPACE)/.tflint.hcl
+	@sed -i "s,TFLINT_AWS_RULESET_VERSION,$(TFLINT_AWS_RULESET_VERSION),g" $(WORKSPACE)/.tflint.hcl
 	@tflint --init
 endif
 
 .PHONY: tflint/init/force
-## Init AWS TFLINT, overwrite current configuration
+## Init AWS TFLINT, overwrites the current configuration
 tflint/init/force:
-	cp $(HABITS)/files/.tflint.hcl $(WORKSPACE)/.tflint.hcl
-	sed -i "s,TFLINT_AWS_RULESET_VERSION,$(TFLINT_AWS_RULESET_VERSION),g" $(WORKSPACE)/.tflint.hcl
+	@cp $(HABITS)/files/terraform/.tflint.hcl $(WORKSPACE)/.tflint.hcl
+	@sed -i "s,TFLINT_AWS_RULESET_VERSION,$(TFLINT_AWS_RULESET_VERSION),g" $(WORKSPACE)/.tflint.hcl
 	@tflint --init
 
 .PHONY: tflint/run
