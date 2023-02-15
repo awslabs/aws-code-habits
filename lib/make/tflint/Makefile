@@ -1,7 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-TFLINT_AWS_RULESET_VERSION?=0.13.4
+TFLINT_AWS_RULESET_VERSION?=0.21.2
 
 .PHONY: tflint/install
 ## Install TFLINT
