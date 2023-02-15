@@ -18,7 +18,7 @@ terrascan/install:
 .PHONY: terrascan/run
 ## Run Terrascan
 terrascan/run:
-	terrascan scan
+	@terrascan scan
 
 .PHONY: terrascan/version
 ## Display Terrascan version

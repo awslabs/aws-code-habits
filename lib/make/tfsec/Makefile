@@ -17,7 +17,7 @@ tfsec/install:
 .PHONY: tfsec/run
 ## Run TFSEC
 tfsec/run:
-	tfsec .
+	@tfsec .
 
 .PHONY: tfsec/version
 ## Display TFSEC version
