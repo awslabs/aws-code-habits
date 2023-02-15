@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.0](https://github.com/awslabs/aws-code-habits/compare/v1.2.0...v1.3.0) (2023-02-15)
+
+
+### Features
+
+* create rules to initialize pre-commit and .gitignore ([5dc7936](https://github.com/awslabs/aws-code-habits/commit/5dc79366f07aa2d9ac6e9d716883fcadca4280cd))
+
+
+### Bug Fixes
+
+* remove python target dependencies ([5219f21](https://github.com/awslabs/aws-code-habits/commit/5219f2170517652d6cb8843f98070a4afd29d7df))
+* tflient.hcl correct path ([3fa8a05](https://github.com/awslabs/aws-code-habits/commit/3fa8a058bca6a589b92db7471838a1aaf428ef55))
+
 ## [1.2.0](https://github.com/awslabs/aws-code-habits/compare/v1.1.0...v1.2.0) (2023-02-03)
 
 
