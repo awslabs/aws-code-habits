@@ -59,3 +59,11 @@ terraform/clean:
 terraform/version:
 	@echo "--- TERRAFORM ---"
 	@terraform --version
+
+.PHONY: terraform/pre-commit/init
+terraform/pre-commit/init:
+	@cp $(HABITS)/files/terraform/.pre-commit-config.yaml ./
+
+.PHONY: terraform/gitignore/init
+terraform/gitignore/init: GITIGNORE=macos,windows,linux,visualstudiocode,terraform
+terraform/gitignore/init: gitignore/install gitignore/init
