@@ -30,8 +30,6 @@ repos:
   - id: detect-private-key
   # Ensures that a file is either empty, or ends with one newline.
   - id: end-of-file-fixer
-  # Prevent addition of new git submodules
-  - id: forbid-new-submodules
   # Replaces or checks mixed line ending
   - id: mixed-line-ending
     args: ['--fix=lf']
