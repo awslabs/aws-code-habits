@@ -1,5 +1,5 @@
 {
   "name": "AWS Code Habits",
   "image": "mcr.microsoft.com/devcontainers/python:0-3.11",
-  "postCreateCommand": ".devcontainer/post-create-command.sh"
+  "postCreateCommand": ".devcontainer/post-create.sh"
 }
