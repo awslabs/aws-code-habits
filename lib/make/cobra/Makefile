@@ -5,12 +5,12 @@ cobra/install:
 
 .PHONY: cobra/add
 ## Add a cobra command
-cobra/add: 
+cobra/add:
 	$(call assert-set,COMMAND)
 	cobra-cli add $(COMMAND)
 
 .PHONY: cobra/del
 ## Delete a Cobra command
-cobra/del: 
+cobra/del:
 	$(call assert-set,COMMAND)
 	rm -f cmd/$(COMMAND).go
