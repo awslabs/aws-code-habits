@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.4.0](https://github.com/awslabs/aws-code-habits/compare/v1.3.0...v1.4.0) (2023-03-07)
+
+
+### Features
+
+* add cobra command ([3e64a1a](https://github.com/awslabs/aws-code-habits/commit/3e64a1ac6f3c5b01a0a9e9ae65efb4a94014d70e))
+* add golang command ([ca9b531](https://github.com/awslabs/aws-code-habits/commit/ca9b5315d04e1e4ca5279cc3c2f17d6a9efcdcaa))
+
 ## [1.3.0](https://github.com/awslabs/aws-code-habits/compare/v1.2.0...v1.3.0) (2023-02-15)
 
 
