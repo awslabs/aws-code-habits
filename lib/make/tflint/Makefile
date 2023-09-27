@@ -29,7 +29,7 @@ tflint/init/force:
 .PHONY: tflint/run
 ## Run TFLINT
 tflint/run:
-	@tflint .
+	@tflint
 
 .PHONY: tflint/version
 ## Display TFLINT version
