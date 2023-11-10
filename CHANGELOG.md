@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.4.1](https://github.com/awslabs/aws-code-habits/compare/v1.4.0...v1.4.1) (2023-11-10)
+
+
+### Bug Fixes
+
+* see https://github.com/terraform-linters/tflint/discussions/1680 ([c9fb076](https://github.com/awslabs/aws-code-habits/commit/c9fb0763aa299767fa70aa2e90af6ed664a010a7))
+
 ## [1.4.0](https://github.com/awslabs/aws-code-habits/compare/v1.3.0...v1.4.0) (2023-03-07)
 
 
