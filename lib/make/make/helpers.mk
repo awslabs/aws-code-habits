@@ -1,19 +1,29 @@
-DEFAULT_HELP_TARGET ?= help/clean
-HELP_FILTER ?= .*help
+.DEFAULT_GOAL := help
+
+SHELL = /bin/bash
+
+export SELF ?= $(MAKE)
+export EDITOR ?= vim
 
 green = $(shell echo -e '\x1b[32;01m$1\x1b[0m')
 yellow = $(shell echo -e '\x1b[33;01m$1\x1b[0m')
 red = $(shell echo -e '\x1b[33;31m$1\x1b[0m')
 
+.PHONY: help
+help: help/clean
+	@exit 0
+
+HELP_FILTER ?= .*help
+
 ## Help screen
 help/clean:
 	@printf "Available targets:\n\n"
-	@$(SELF) -s help/generate | grep -v -E "\w($(HELP_FILTER))"
+	@$(MAKE) -s help/generate | grep -v -E "\w($(HELP_FILTER))"
 
 ## Display help for all targets
 help/all:
 	@printf "All Available targets:\n\n"
-	@$(SELF) -s help/generate
+	@$(MAKE) -s help/generate
 
 # Generate help output from MAKEFILE_LIST
 help/generate:
@@ -35,7 +45,7 @@ help/doc:
 	@printf "## Make\n\n" > Makefile.md
 	@printf '```' >> Makefile.md
 	@printf "\nAvailable targets:\n\n" >> Makefile.md
-	@$(SELF) -s help/generate-no-colour | grep -v -E "\w($(HELP_FILTER))" >> Makefile.md
+	@$(MAKE) -s help/generate-no-colour | grep -v -E "\w($(HELP_FILTER))" >> Makefile.md
 	@printf '```' >> Makefile.md
 
 # Generate help output from MAKEFILE_LIST
@@ -52,6 +62,3 @@ help/generate-no-colour:
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST) | sort -u
 	@printf "\n"
-
-default:: $(DEFAULT_HELP_TARGET)
-	@exit 0
