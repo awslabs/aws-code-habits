@@ -12,23 +12,7 @@ jobs:
   test:
     runs-on: [ubuntu-latest]
     steps:
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-
-      - name: Create Makefile
-        run: |
-          git init
-          echo 'export WORKSPACE=$(shell pwd)' | tee Makefile
-          echo 'export HABITS = $(WORKSPACE)/habits' | tee --append Makefile
-          echo 'include $(HABITS)/lib/make/Makefile' | tee --append Makefile
-          echo 'include $(HABITS)/lib/make/*/Makefile' | tee --append Makefile
-
-      - name: Clone repository
-        uses: actions/checkout@v3
-        with:
-          path: habits
+      - uses: actions/checkout@v4
 
       - name: Habits Install
         run: make habits/install
