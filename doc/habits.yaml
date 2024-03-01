@@ -39,10 +39,12 @@ getting_started: |-
 
   ```bash
   export WORKSPACE=$(shell pwd)
-  export HABITS = $(WORKSPACE)/habits
+  export HABITS = $(WORKSPACE)
 
-  include $(HABITS)/lib/make/Makefile
-  include $(HABITS)/lib/make/*/Makefile
+  include $(WORKSPACE)/tools.env # pin the version of your tools
+
+  include $(HABITS)/lib/make/*/*.mk
+  include $(HABITS)/lib/make/*.mk
   ```
 
   Remember, next time you need to clone your repository, you will need to include `--recurse-submodules` parameters.
@@ -79,20 +81,6 @@ usage: |-
   For more information about each [Make targets available](Makefile.md).
 
 how_tos:
-  - title: How to import environment variables
-    content: |-
-      Create a `.env` file, example:
-
-      ```bash
-      echo 'ENVIRONMENT=dev' > dev.env
-      ```
-
-      Now include `dev.env` into your Makefile, for example:
-      ```bash
-      include $(WORKSPACE)/tools.env # pin the version of your tools
-      include $(WORKSPACE)/dev.env # don't store secrets in git
-      include $(WORKSPACE)/dev.secrets.env # remember to add *.secrets.env to .gitignore
-      ```
   - title: How to initialize pre-commit config
     content: |-
       ```bash
@@ -104,6 +92,7 @@ how_tos:
       ```bash
       make pre-commit/run
       ```
+
   - title: How to maintain documentation
     content: |-
       1. First initialize all documentation files:
@@ -120,6 +109,7 @@ how_tos:
       ```
 
       3. `README.md` will be rendered.
+
   - title: How to expand Habits commands
     content: |-
       You can use [Habits][habits] to meet your needs, in your `Makefile` you can add the following to ensure code and documentation hygiene:

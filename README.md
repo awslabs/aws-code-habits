@@ -31,7 +31,6 @@ A library with Make targets, Ansible playbooks, Jinja templates (and more) desig
 - [Usage](#usage)
 
 - [How-Tos](#how-tos)
-  - [How to import environment variables](#how-to-import-environment-variables)
   - [How to initialize pre-commit config](#how-to-initialize-pre-commit-config)
   - [How to maintain documentation](#how-to-maintain-documentation)
   - [How to expand Habits commands](#how-to-expand-habits-commands)
@@ -54,10 +53,12 @@ Now, you will need to create, or add to your existing, `Makefile`.
 
 ```bash
 export WORKSPACE=$(shell pwd)
-export HABITS = $(WORKSPACE)/habits
+export HABITS = $(WORKSPACE)
 
-include $(HABITS)/lib/make/Makefile
-include $(HABITS)/lib/make/*/Makefile
+include $(WORKSPACE)/tools.env # pin the version of your tools
+
+include $(HABITS)/lib/make/*/*.mk
+include $(HABITS)/lib/make/*.mk
 ```
 
 Remember, next time you need to clone your repository, you will need to include `--recurse-submodules` parameters.
@@ -91,20 +92,6 @@ For more information about each [Make targets available](Makefile.md).
 
 ## How-Tos
 Below you can learn
-
-### How to import environment variables
-Create a `.env` file, example:
-
-```bash
-echo 'ENVIRONMENT=dev' > dev.env
-```
-
-Now include `dev.env` into your Makefile, for example:
-```bash
-include $(WORKSPACE)/tools.env # pin the version of your tools
-include $(WORKSPACE)/dev.env # don't store secrets in git
-include $(WORKSPACE)/dev.secrets.env # remember to add *.secrets.env to .gitignore
-```
 
 ### How to initialize pre-commit config
 ```bash
