@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test:
+  habits:
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
@@ -28,3 +28,160 @@ jobs:
 
       - name: Uninstall Habits
         run: make habits/remove
+  checkov:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkov Install
+        run: make checkov/install
+
+      - name: Checkov version
+        run: make checkov/version
+  cobra:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cobra Install
+        run: make go/install cobra/install
+
+      - name: Cobra version
+        run: make cobra/version
+  go:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Go Install
+        run: make go/install
+
+      - name: Go version
+        run: make go/version
+  gomplate:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Gomplate Install
+        run: make gomplate/install
+
+      - name: Gomplate version
+        run: make gomplate/version
+  nodejs:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: NodeJS Install
+        run: make nodejs/install
+
+      - name: NodeJS version
+        run: make nodejs/version
+  npm:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: NPM Install
+        run: make npm/install
+
+      - name: NPM version
+        run: make npm/version
+  nuke:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Nuke Install
+        run: make nuke/install
+
+      - name: Nuke version
+        run: make nuke/version
+  pre-commit:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pre-Commit Install
+        run: make pre-commit/install
+
+      - name: Pre-Commit version
+        run: make pre-commit/version
+  prettier:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prettier Install
+        run: make prettier/install
+
+      - name: Prettier version
+        run: make prettier/version
+  terraform:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Terraform Install
+        run: make terraform/install
+
+      - name: Terraform version
+        run: make terraform/version
+  terraform-docs:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Terraform-Docs Install
+        run: make terraform-docs/install
+
+      - name: Terraform-Docs version
+        run: make terraform-docs/version
+  terrascan:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Terrascan Install
+        run: make terrascan/install
+
+      - name: Terrascan version
+        run: make terrascan/version
+  tflint:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: TFLint Install
+        run: make tflint/install
+
+      - name: TFLint version
+        run: make tflint/version
+  tfsec:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tfsec Install
+        run: make tfsec/install
+
+      - name: Tfsec version
+        run: make tfsec/version
+  tfswitch:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tfswitch Install
+        run: make tfswitch/install
+
+      - name: Tfswitch version
+        run: make tfswitch/version
+  ubuntu:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ubuntu version
+        run: make ubuntu/version

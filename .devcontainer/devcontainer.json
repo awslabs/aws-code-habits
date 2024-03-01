@@ -9,6 +9,6 @@
       "version": "latest"
     }
   },
-  "postCreateCommand": "sudo apt update -y && sudo apt install -y bash-completion make",
-  "postStartCommand": "sudo apt update"
+  "postCreateCommand": "sudo apt -qq update && sudo apt -qq install --yes bash-completion make",
+  "postStartCommand": "sudo apt -qq update"
 }
