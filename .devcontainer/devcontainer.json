@@ -1,5 +1,14 @@
 {
   "name": "AWS Code Habits",
-  "image": "mcr.microsoft.com/devcontainers/python:0-3.11",
-  "postCreateCommand": ".devcontainer/post-create.sh"
+  "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/ansible": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers-contrib/features/pre-commit": {
+      "version": "latest"
+    }
+  },
+  "postCreateCommand": "sudo apt update -y && sudo apt install -y bash-completion make",
+  "postStartCommand": "sudo apt update"
 }
