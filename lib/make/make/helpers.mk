@@ -62,3 +62,9 @@ help/generate-no-colour:
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST) | sort -u
 	@printf "\n"
+
+.PHONY: fix/makefiles
+## Find all Makefile files and display their contents
+fix/makefiles:
+	@find . -name "Makefile" -exec cat -e -t -v {} \;
+	@find . -name "*.mk" -exec cat -e -t -v {} \;
