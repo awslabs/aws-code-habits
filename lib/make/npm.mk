@@ -11,8 +11,8 @@ npm/version:
 
 .PHONY: npm/install-global
 npm/install-global:
-    mkdir -p ~/.npm-global
-    npm config set prefix '~/.npm-global'
+	mkdir -p ~/.npm-global
+	npm config set prefix '~/.npm-global'
 
 .PHONY: npm/update-path
 npm/update-path:
