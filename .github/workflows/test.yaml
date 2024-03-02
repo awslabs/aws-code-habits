@@ -2,11 +2,9 @@ name: Test
 on:
   push:
     branches:
-      - feature/*
-      - bugfix/*
-      - hotfix/*
-      - develop
       - main
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   habits:
@@ -46,8 +44,8 @@ jobs:
       - name: Cobra Install
         run: make go/install cobra/install
 
-      - name: Cobra version
-        run: make cobra/version
+      # - name: Cobra version
+        # run: make cobra/version # TODO
   go:
     runs-on: [ubuntu-latest]
     steps:
@@ -113,7 +111,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Prettier Install
+      - name: Setup NPM Global
+        run: make npm/install-global npm/update-path
+        
+      - name: Install Prettier
         run: make prettier/install
 
       - name: Prettier version

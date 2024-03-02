@@ -23,7 +23,7 @@ aws/cli/autocomplete:
 
 .PHONY: aws/cli/install/sso-creds-helper
 aws/cli/install/sso-creds-helper:
-	@source /usr/local/share/nvm/nvm.sh && npm install -g aws-sso-creds-helper
+	npm install -g aws-sso-creds-helper
 
 .PHONY: aws/cli/version
 ## Display AWS CLI version

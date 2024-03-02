@@ -25,3 +25,8 @@ nodejs/install/v20:
 .PHONY: nodejs/install
 ## Install NodeJS
 nodejs/install: nodejs/install/v18
+
+.PHONY: nodejs/version
+## Show NodeJS version
+nodejs/version:
+	@node --version
