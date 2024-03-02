@@ -1,5 +1,5 @@
 .PHONY: nuke/install
-nuke/install: 
+nuke/install:
 	$(call assert-set,AWS_NUKE_VERSION)
 	wget https://github.com/rebuy-de/aws-nuke/releases/download/$(AWS_NUKE_VERSION)/aws-nuke-$(AWS_NUKE_VERSION)-linux-amd64.tar.gz
 	tar -xzf aws-nuke-$(AWS_NUKE_VERSION)-linux-amd64.tar.gz

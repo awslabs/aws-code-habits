@@ -4,7 +4,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
 
 jobs:
   habits:
@@ -45,7 +45,7 @@ jobs:
         run: make go/install cobra/install
 
       # - name: Cobra version
-        # run: make cobra/version # TODO
+      # run: make cobra/version # TODO
   go:
     runs-on: [ubuntu-latest]
     steps:
@@ -113,7 +113,7 @@ jobs:
 
       - name: Setup NPM Global
         run: make npm/install-global npm/update-path
-        
+
       - name: Install Prettier
         run: make prettier/install
 
