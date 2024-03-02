@@ -16,5 +16,5 @@ npm/install-global:
 
 .PHONY: npm/update-path
 npm/update-path:
-    echo 'export PATH=~/.npm-global/bin:$$PATH' >> ~/.bashrc
-    source ~/.bashrc
+	echo 'export PATH=~/.npm-global/bin:$$PATH' >> ~/.bashrc
+	source ~/.bashrc
