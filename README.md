@@ -53,7 +53,7 @@ Now, you will need to create, or add to your existing, `Makefile`.
 
 ```bash
 export WORKSPACE=$(shell pwd)
-export HABITS = $(WORKSPACE)
+export HABITS = $(WORKSPACE)/habits
 
 include $(WORKSPACE)/tools.env # pin the version of your tools
 
