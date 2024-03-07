@@ -5,7 +5,7 @@
 
 .PHONY: aws/cli/install
 ## Install AWS Command Line Interface v2
-aws/cli/install: aws/cli/install/v2 aws/cli/autocomplete aws/cli/install/sso-creds-helper
+aws/cli/install: aws/cli/install/v2 aws/cli/autocomplete
 
 .PHONY:aws/cli/install/v2
 aws/cli/install/v2:
