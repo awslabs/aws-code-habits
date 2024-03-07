@@ -10,6 +10,7 @@ npm/version:
 	@npm --version
 
 .PHONY: npm/install-global
+# Set npm global for current user
 npm/install-global:
 	mkdir -p ~/.npm-global
 	npm config set prefix '~/.npm-global'
@@ -18,3 +19,23 @@ npm/install-global:
 npm/update-path:
 	echo 'export PATH=~/.npm-global/bin:$$PATH' >> ~/.bashrc
 	source ~/.bashrc
+
+.PHONY: npm/update
+## Update packages to the latest version
+npm/update:
+	npm update
+
+.PHONY: npm/outdated
+## List outdated packages
+npm/outdated:
+	npm outdated
+
+.PHONY: npm/audit
+## Run security audit
+npm/audit:
+	npm audit
+
+.PHONY: npm/clean-cache
+## Clean npm cache
+npm/clean-cache:
+	npm cache clean --force
