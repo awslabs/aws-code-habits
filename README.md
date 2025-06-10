@@ -34,6 +34,7 @@ A library with Make targets, Ansible playbooks, Jinja templates (and more) desig
   - [How to initialize pre-commit config](#how-to-initialize-pre-commit-config)
   - [How to maintain documentation](#how-to-maintain-documentation)
   - [How to expand Habits commands](#how-to-expand-habits-commands)
+  - [How to use technology-specific Makefiles](#how-to-use-technology-specific-makefiles)
 
 - [Testing](#testing)
 
@@ -72,10 +73,11 @@ Check the [scripts](scripts/) directory, if you want to automate the initializat
 
 ## Prerequisites
   A list of things you need, or how to install them.
-> At this stage, we are only supporting Linux (Ubuntu) environments (which can be obtained via WSL (Windows) or DevContainers (Mac/Linux/Windows))
+> AWS Code Habits now supports multiple platforms including Linux, macOS, and Windows (with some limitations). Many Makefiles include cross-platform detection and appropriate installation methods.
 
 - [Python 3](https://www.python.org) - Whether you're new to programming or an experienced developer, it's easy to learn and use Python.
 - [Pip](https://pypi.org/project/pip/) - pip is the package installer for Python.
+- [GNU Make](https://www.gnu.org/software/make/) - GNU Make is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
 
 
 
@@ -89,6 +91,16 @@ make [tab][tab]
 make help
 ```
 For more information about each [Make targets available](Makefile.md).
+
+Each technology-specific Makefile includes its own help target. For example:
+
+```bash
+make terraform/help
+make nodejs/help
+make python/help
+make go/help
+make gitignore/help
+```
 
 ## How-Tos
 Below you can learn
@@ -142,11 +154,114 @@ discard: aws/cloudformation/delete-change-set
 apply: aws/cloudformation/execute-change-set
 ```
 
+### How to use technology-specific Makefiles
+AWS Code Habits includes several technology-specific Makefiles that provide targets for common development tasks:
+
+### Terraform
+```bash
+# Install Terraform
+make terraform/install
+
+# Initialize Terraform
+make terraform/init
+
+# Plan changes
+make terraform/plan
+
+# Apply changes
+make terraform/apply
+
+# Manage workspaces
+make terraform/workspace/list
+make terraform/workspace/new WORKSPACE_NAME=dev
+```
+
+### AWS CDK
+```bash
+# Install AWS CDK
+make aws/cdk/install
+
+# Bootstrap CDK environment
+make aws/cdk/bootstrap
+
+# Deploy CDK stack
+make aws/cdk/deploy
+
+# Synthesize CloudFormation template
+make aws/cdk/synth
+```
+
+### Python
+```bash
+# Install Python
+make python/install
+
+# Initialize virtual environment
+make python/virtualenv/init
+
+# Set up Poetry
+make python/poetry/install
+make python/poetry/init
+
+# Run tests
+make python/test
+```
+
+### Node.js
+```bash
+# Install Node.js
+make nodejs/install
+
+# Initialize projects
+make nodejs/init/express
+make nodejs/init/react
+make nodejs/init/vue
+
+# Package management
+make nodejs/add PACKAGE=express
+make nodejs/add/dev PACKAGE=jest
+```
+
+### Go
+```bash
+# Install Go
+make go/install
+
+# Build application
+make go/app/build OUTPUT=myapp
+
+# Run tests
+make go/app/test
+```
+
+### Gitignore
+```bash
+# Initialize gitignore for specific project types
+make gitignore/init/web
+make gitignore/init/python
+make gitignore/init/node
+```
+
 
 ## Testing
 To perform habits checks:
 ```bash
 make habits/check
+```
+
+Each technology-specific Makefile includes its own testing targets. For example:
+
+```bash
+# Run Python tests
+make python/test
+make python/test/coverage
+
+# Run Node.js tests
+make nodejs/test
+
+# Run Go tests
+make go/app/test
+make go/app/test/coverage
 ```
 
 
@@ -158,11 +273,14 @@ make habits/check
 - [VSCode Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) - An extension pack that lets you open any folder in a container, on a remote machine, or in WSL and take advantage of VS Code's full feature set.
 - [Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) - Submodules allow you to keep a Git repository as a subdirectory of another Git repository.
 - [Docker](https://www.docker.com/products/docker-desktop/) - The fastest way to containerize applications
-- [Visual Studio Code](https://code.visualstudio.com/) - Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications.
 - [Visual Studio DevContainers](https://code.visualstudio.com/docs/devcontainers/containers) - The Visual Studio Code Dev Containers extension lets you use a Docker container as a full-featured development environment.
-- [VSCode Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) - An extension pack that lets you open any folder in a container, on a remote machine, or in WSL and take advantage of VS Code's full feature set.
 - [Ansible](https://www.ansible.com/) - Ansible is an open source community project sponsored by Red Hat, it's the simplest way to automate IT.
 - [Jinja2](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html) - Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts.
+- [Terraform](https://www.terraform.io/) - Terraform is an infrastructure as code tool that lets you build, change, and version infrastructure safely and efficiently.
+- [AWS CDK](https://aws.amazon.com/cdk/) - The AWS Cloud Development Kit (AWS CDK) is an open-source software development framework to define cloud infrastructure in code and provision it through AWS CloudFormation.
+- [Python](https://www.python.org/) - Python is a programming language that lets you work quickly and integrate systems more effectively.
+- [Node.js](https://nodejs.org/) - Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+- [Go](https://golang.org/) - Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.
 
 
 ## License

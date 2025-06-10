@@ -58,7 +58,7 @@ getting_started: |-
 prerequisites:
   content: |-
     A list of things you need, or how to install them.
-    > At this stage, we are only supporting Linux (Ubuntu) environments (which can be obtained via WSL (Windows) or DevContainers (Mac/Linux/Windows))
+    > AWS Code Habits now supports multiple platforms including Linux, macOS, and Windows (with some limitations). Many Makefiles include cross-platform detection and appropriate installation methods.
 
   references:
     - name: Python 3
@@ -67,6 +67,9 @@ prerequisites:
     - name: Pip
       description: pip is the package installer for Python.
       url: https://pypi.org/project/pip/
+    - name: GNU Make
+      description: GNU Make is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
+      url: https://www.gnu.org/software/make/
 
 # required
 usage: |-
@@ -79,6 +82,16 @@ usage: |-
   make help
   ```
   For more information about each [Make targets available](Makefile.md).
+
+  Each technology-specific Makefile includes its own help target. For example:
+  
+  ```bash
+  make terraform/help
+  make nodejs/help
+  make python/help
+  make go/help
+  make gitignore/help
+  ```
 
 how_tos:
   - title: How to initialize pre-commit config
@@ -133,10 +146,114 @@ how_tos:
       apply: aws/cloudformation/execute-change-set
       ```
 
+  - title: How to use technology-specific Makefiles
+    content: |-
+      AWS Code Habits includes several technology-specific Makefiles that provide targets for common development tasks:
+
+      ### Terraform
+      ```bash
+      # Install Terraform
+      make terraform/install
+
+      # Initialize Terraform
+      make terraform/init
+
+      # Plan changes
+      make terraform/plan
+
+      # Apply changes
+      make terraform/apply
+
+      # Manage workspaces
+      make terraform/workspace/list
+      make terraform/workspace/new WORKSPACE_NAME=dev
+      ```
+
+      ### AWS CDK
+      ```bash
+      # Install AWS CDK
+      make aws/cdk/install
+
+      # Bootstrap CDK environment
+      make aws/cdk/bootstrap
+
+      # Deploy CDK stack
+      make aws/cdk/deploy
+
+      # Synthesize CloudFormation template
+      make aws/cdk/synth
+      ```
+
+      ### Python
+      ```bash
+      # Install Python
+      make python/install
+
+      # Initialize virtual environment
+      make python/virtualenv/init
+
+      # Set up Poetry
+      make python/poetry/install
+      make python/poetry/init
+
+      # Run tests
+      make python/test
+      ```
+
+      ### Node.js
+      ```bash
+      # Install Node.js
+      make nodejs/install
+
+      # Initialize projects
+      make nodejs/init/express
+      make nodejs/init/react
+      make nodejs/init/vue
+
+      # Package management
+      make nodejs/add PACKAGE=express
+      make nodejs/add/dev PACKAGE=jest
+      ```
+
+      ### Go
+      ```bash
+      # Install Go
+      make go/install
+
+      # Build application
+      make go/app/build OUTPUT=myapp
+
+      # Run tests
+      make go/app/test
+      ```
+
+      ### Gitignore
+      ```bash
+      # Initialize gitignore for specific project types
+      make gitignore/init/web
+      make gitignore/init/python
+      make gitignore/init/node
+      ```
+
 testing: |-
   To perform habits checks:
   ```bash
   make habits/check
+  ```
+
+  Each technology-specific Makefile includes its own testing targets. For example:
+  
+  ```bash
+  # Run Python tests
+  make python/test
+  make python/test/coverage
+  
+  # Run Node.js tests
+  make nodejs/test
+  
+  # Run Go tests
+  make go/app/test
+  make go/app/test/coverage
   ```
 
 references:
@@ -158,21 +275,30 @@ references:
   - name: Docker
     description: The fastest way to containerize applications
     url: https://www.docker.com/products/docker-desktop/
-  - name: Visual Studio Code
-    description: Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications.
-    url: https://code.visualstudio.com/
   - name: Visual Studio DevContainers
     description: The Visual Studio Code Dev Containers extension lets you use a Docker container as a full-featured development environment.
     url: https://code.visualstudio.com/docs/devcontainers/containers
-  - name: VSCode Remote Development Extension Pack
-    description: An extension pack that lets you open any folder in a container, on a remote machine, or in WSL and take advantage of VS Code's full feature set.
-    url: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack
   - name: Ansible
     description: Ansible is an open source community project sponsored by Red Hat, it's the simplest way to automate IT.
     url: https://www.ansible.com/
   - name: Jinja2
     description: Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts.
     url: https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html
+  - name: Terraform
+    description: Terraform is an infrastructure as code tool that lets you build, change, and version infrastructure safely and efficiently.
+    url: https://www.terraform.io/
+  - name: AWS CDK
+    description: The AWS Cloud Development Kit (AWS CDK) is an open-source software development framework to define cloud infrastructure in code and provision it through AWS CloudFormation.
+    url: https://aws.amazon.com/cdk/
+  - name: Python
+    description: Python is a programming language that lets you work quickly and integrate systems more effectively.
+    url: https://www.python.org/
+  - name: Node.js
+    description: Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+    url: https://nodejs.org/
+  - name: Go
+    description: Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.
+    url: https://golang.org/
 
 license: MIT-0
 
