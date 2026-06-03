@@ -34,7 +34,7 @@ ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
 endif
 
 # Default Node.js version
-NODE_VERSION ?= 18
+NODE_VERSION ?= 20
 
 # Default project directory
 NODE_DIR ?= .

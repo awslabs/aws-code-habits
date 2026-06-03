@@ -1,4 +1,4 @@
-NVM_VERSION ?= v0.39.3
+NVM_VERSION ?= v0.40.4
 
 .PHONY: nvm/install
 ## Install nvm
