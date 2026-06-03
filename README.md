@@ -49,7 +49,21 @@ On a terminal, on your project's root directory, execute one of the following co
 git submodule add --name habits -b main https://github.com/awslabs/aws-code-habits.git habits
 ```
 
-This will clone AWS Code Habits on a folder named `habits` and track against the `main` branch.
+This clones AWS Code Habits into a folder named `habits` tracking the `main` branch.
+
+> **Pin to a release.** Tracking `main` exposes you to silent breakage. After
+> adding the submodule, check out a tagged release (or a specific commit SHA)
+> and commit the resulting `.gitmodules` / submodule pointer:
+>
+> ```bash
+> git -C habits fetch --tags
+> git -C habits checkout v1.5.0   # or any tag from CHANGELOG.md
+> git add habits && git commit -m "chore: pin habits to v1.5.0"
+> ```
+>
+> See [CHANGELOG.md](CHANGELOG.md) for available releases. To bump later,
+> repeat the `checkout` step against a newer tag.
+
 Now, you will need to create, or add to your existing, `Makefile`.
 
 ```bash
@@ -101,6 +115,16 @@ make python/help
 make go/help
 make gitignore/help
 ```
+
+### Safety & supply chain
+
+Habits ships with safety guards and supply-chain knobs you should know about:
+
+- **Destructive targets are gated.** `terraform/apply`, `terraform/destroy`, `aws/cdk/destroy*`, `nuke/run`, and `docker/remove-*` prompt for `yes` before running. Set `CONFIRM=yes` to skip the prompt in CI.
+- **Tool downloads can be checksum-verified.** Set `TFLINT_SHA256`, `TERRASCAN_SHA256` (and other `*_SHA256` variables) in your `tools.env` to enforce SHA256 verification on installed binaries. If unset, install proceeds with a clear warning.
+- **Tool versions are overridable.** Every `*_VERSION` variable uses `?=`, so define your own in `tools.env` to pin specific releases.
+
+See [docs/HARDENING.md](docs/HARDENING.md) for the full list of safety variables and recommended values.
 
 ## How-Tos
 Below you can learn

@@ -5,6 +5,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Features
+
+* Cross-platform OS detection (linux/darwin/windows) in `terraform.mk`, `python.mk`, `go.mk`, `nodejs.mk`, `aws/cdk.mk`.
+* Terraform: workspace management, state operations, environment-aware plan/apply/destroy targets.
+* AWS CDK: deploy, diff, synth, watch, list, destroy, and per-stack/all variants.
+* Python: poetry and pipenv support; consolidated lint/format/test targets.
+* Node.js: yarn, pnpm, and npm targets unified; init templates for express/react/vue/next.
+* Go: test, coverage, and benchmark targets.
+* `gitignore` profiles for web, python, node, java, go, terraform, aws.
+
+### Security
+
+* `permissions:` blocks added to all GitHub Actions workflows (least-privilege `GITHUB_TOKEN`). Backports [#20](https://github.com/awslabs/aws-code-habits/pull/20).
+* All GitHub Actions pinned to commit SHAs (with tag comments) and Dependabot configured for weekly bumps.
+* Stripped `--no-check-certificate` from `wget` calls in `gomplate`, `terraform-docs`, `tfsec`, and `terrascan` installers.
+* `terrascan` install now performs real `sha256sum -c` verification when `TERRASCAN_SHA256` is set; URL updated from `accurics` (legacy) to `tenable`.
+* `tflint` install no longer pipes `master`-branch shell scripts through `bash`; replaced with tagged-release zip + optional `TFLINT_SHA256` checksum.
+* `aws-nuke` install URL updated from `rebuy-de` (unmaintained) to `ekristen`.
+* New `lib/make/make/safety.mk` with a `confirm` macro. Wired into `terraform/apply`, `terraform/destroy`, `aws/cdk/destroy*`, `nuke/run`, and destructive `docker/*` targets. Set `CONFIRM=yes` to bypass for CI.
+* `SECURITY.md` now points reporters to <aws-security@amazon.com> and <https://aws.amazon.com/security/vulnerability-reporting/> instead of asking them to file public issues.
+
+### Tool versions
+
+* Terraform 1.5.7 → 1.9.8 (note: BSL transition; override `TERRAFORM_VERSION=1.5.7` for the last MPL release).
+* Go 1.21.0 → 1.23.12, Node 18 → 20 (LTS), nvm 0.39.3 → 0.40.4.
+* AWS CDK 2.96.2 → 2.257.0, gomplate 3.11.3 → 4.3.3, terraform-docs 0.16.0 → 0.20.0.
+* aws-nuke v2.25.0 → v3.65.0, tflint AWS ruleset 0.21.2 → 0.47.0, tfsec 1.15.2 → 1.28.14, terrascan 1.13.2 → 1.19.9.
+* `tfsec.mk` now carries a deprecation note pointing users to Aqua's [Trivy](https://github.com/aquasecurity/trivy).
+
+### Documentation
+
+* `refactoring-plan.md` moved out of the repo root to `docs/archive/2025-06-refactoring-plan.md` (it was shipping into every consuming submodule tree).
+* New `docs/HARDENING.md` documenting checksum variables, `CONFIRM` gate, and pinning guidance.
+* `README.md`: added submodule pinning guidance and a security-posture note.
+
 ## [1.5.0](https://github.com/awslabs/aws-code-habits/compare/v1.4.1...v1.5.0) (2024-03-07)
 
 

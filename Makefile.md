@@ -3,13 +3,51 @@
 ```
 Available targets:
 
+  ansible/install                     Install Ansible
+  aws/amplify/add-analytics           Add an AWS resource to the project
+  aws/amplify/clean                   Clean up any generated files or build artifacts
+  aws/amplify/codegen                 Generate code for the Amplify resources
+  aws/amplify/configure               Configure Amplify project settings
+  aws/amplify/console                 Open the Amplify Console for the project
+  aws/amplify/deploy                  Deploy amplify hosting resources
+  aws/amplify/docs                    Open the Amplify documentation
+  aws/amplify/edit                    View or edit the current Amplify project
+  aws/amplify/init                    Initialize a new Amplify project
+  aws/amplify/install                 Install AWS Amplify CLI on Ubuntu 22.04
+  aws/amplify/list                    List available Amplify resources in the project
+  aws/amplify/push                    Push local changes to the Amplify environment
+  aws/amplify/remove                  Remove Amplify resources
+  aws/amplify/status                  Check the status of the Amplify project
+  aws/cdk/bootstrap                   Bootstrap CDK environment
+  aws/cdk/deploy                      Deploy CDK stack
+  aws/cdk/deploy/%                    Deploy specific stack
+  aws/cdk/deploy/all                  Deploy all stacks
+  aws/cdk/deploy/env                  Deploy to specific environment
+  aws/cdk/destroy                     Destroy CDK stack
+  aws/cdk/destroy-bootstrap           Destroy CDK bootstrap resources
+  aws/cdk/destroy/%                   Destroy specific stack
+  aws/cdk/destroy/all                 Destroy all stacks
+  aws/cdk/diff                        Compare deployed stack with current state
+  aws/cdk/install                     Install AWS CDK
+  aws/cdk/install/VERSION             Install specific AWS CDK version
+  aws/cdk/list                        List all stacks in the app
+  aws/cdk/synth                       Synthesize CloudFormation template
+  aws/cdk/synth/env                   Synthesize CloudFormation template for specific environment
+  aws/cdk/test                        Run tests
+  aws/cdk/test/watch                  Run tests in watch mode
+  aws/cdk/version                     Display AWS CDK version
+  aws/cdk/watch                       Watch for changes and deploy automatically
   aws/cfn-lint/install                Install AWS CloudFormation Linter
   aws/cli/install                     Install AWS Command Line Interface v2
   aws/cli/version                     Display AWS CLI version
   aws/cloudformation/create-change-set Creates a list of changes that will be applied to a stack so that you can review the changes before executing them.
   aws/cloudformation/create-change-set-without-parameters Creates a list of changes that will be applied to a stack so that you can review the changes before executing them.
+  aws/cloudformation/create-folder-structure Create a folder structure for CloudFormation projects
+  aws/cloudformation/create-parameters Copy a CloudFormation parameters to be used as example
+  aws/cloudformation/create-project   Create a CloudFormation project structure
   aws/cloudformation/create-stack     Creates a stack as specified in the template.
   aws/cloudformation/create-stack-without-parameters Creates a stack as specified in the template. (don't pass --parameters flag)
+  aws/cloudformation/create-template-yaml Copy a CloudFormation template to be used as example
   aws/cloudformation/create/service-linked-role Creates  an  IAM  role that is linked to a specific Amazon Elasticsearch service.
   aws/cloudformation/delete-change-set Delete latest change-set created
   aws/cloudformation/delete-stack     Delete CloudFormation Stack
@@ -22,32 +60,104 @@ Available targets:
   aws/cloudformation/hygiene          Execute CFN Lint and pre-commit rules
   aws/cloudformation/latest-change-set Display latest change-set
   aws/codeartifact/login              Login into AWS CodeArtifact
-  aws/config/init                     Initialize the AWS config file
   aws/ssm/install-plugin              Install AWS SSM plugin
   aws/ssm/start-session               Start session with AWS Systems Manager Session Manager
-  aws/sso/login                       Login into AWS account
-  aws/sts/get-caller-identity         Returns  details  about the IAM user or role whose credentials are used to call the operation.
+  aws/sso/login                       Login into AWS account and export credentials to ~/.aws/credentials
+  aws/sts/assume-role                 Assume role
+  aws/sts/delete-session-token        Delete session token
+  aws/sts/describe-caller-identity    Describe caller identity
+  aws/sts/get-caller-identity         Get caller identity
+  aws/sts/get-session-token           Get session token
+  aws/sts/refresh-session-token       Refresh session token
+  checkov/install                     Install Checkov
+  checkov/run                         Run Checkov
+  checkov/version                     Display checkov version
+  cobra/add                           Add a cobra command
+  cobra/del                           Delete a Cobra command
+  cobra/install                       Install cobra's cli
   doc/build                           Builds documentation
   doc/init                            Initialize documentation
+  docker/prune                        Remove unused images and all stopped containers
   docker/remove-containers            Remove all Docker containers
   docker/remove-images                Remove all Docker images
   docker/remove-volumes               Remove all Docker volumes
+  fix/makefiles                       Find all Makefile files and display their contents
   git/config/init                     Initialize git configuration for project
   github/actions/init                 Initialize .github/actions directory
   github/issues/init                  Initialize .github/issues directory
   github/pull-request/init            Initialize .github/pull-request directory
   github/workflows/init               Initialize .github/workflows directory
-  gitignore/init                      Create .gitignore file
-  gitignore/install                   Install gitignore
-  gitignore/list                      List all gitignore templates
+  gitignore/add                       Add new rules to .gitignore
+  gitignore/generate                  Generate .gitignore based on project structure
+  gitignore/init                      Create a .gitignore file with default templates
+  gitignore/init/aws                  Create .gitignore for AWS development
+  gitignore/init/go                   Create .gitignore for Go development
+  gitignore/init/java                 Create .gitignore for Java development
+  gitignore/init/node                 Create .gitignore for Node.js development
+  gitignore/init/python               Create .gitignore for Python development
+  gitignore/init/terraform            Create .gitignore for Terraform development
+  gitignore/init/web                  Create .gitignore for web development
+  gitignore/install                   Install gitignore CLI tool
+  gitignore/list                      List all available gitignore templates
+  gitignore/update                    Update existing .gitignore file
+  go/app/build                        Compile packages and dependencies
+  go/app/clean                        Remove object files and cached files
+  go/app/fmt                          Format Go code
+  go/app/generate                     Generate Go files by processing source
+  go/app/get                          Add dependencies to current module and install them
+  go/app/install                      Compile and install packages and dependencies
+  go/app/lint                         Run linter
+  go/app/list                         List packages or modules
+  go/app/mod/download                 Download modules to local cache
+  go/app/mod/init                     Initialize a new module
+  go/app/mod/tidy                     Add missing and remove unused modules
+  go/app/mod/vendor                   Make vendored copy of dependencies
+  go/app/run                          Compile and run Go program
+  go/app/test                         Run tests
+  go/app/test/benchmark               Run benchmarks
+  go/app/test/coverage                Run tests with coverage
+  go/env                              Print Go environment information
+  go/install                          Install Go
+  go/install/VERSION                  Install specific Go version
+  go/version                          Display Go version
+  gomplate/version                    Display Gomplate version
   habits/check                        Performs checks
   habits/init                         Initialize gitignore, documentation, pre-commit, github workflows, issues and pull-request
   habits/install                      Install Habits dependencies
   habits/remove                       Uninstall Habits
   habits/update                       Update Habits
   help/clean                          Help screen
-  nodejs/install                      Install NodeJS
-  npm/install                         Install NPM
+  nodejs/add                          Add a package using the selected package manager
+  nodejs/add/dev                      Add a development package using the selected package manager
+  nodejs/format                       Format code
+  nodejs/init/express                 Initialize Express.js project
+  nodejs/init/next                    Initialize Next.js project
+  nodejs/init/react                   Initialize React project
+  nodejs/init/vue                     Initialize Vue.js project
+  nodejs/install                      Install Node.js (default version)
+  nodejs/install/v%                   Install specific Node.js version
+  nodejs/lint                         Run linter
+  nodejs/remove                       Remove a package using the selected package manager
+  nodejs/run                          Run Node.js script
+  nodejs/test                         Run tests
+  nodejs/version                      Display Node.js version
+  npm/audit                           Run security audit
+  npm/clean-cache                     Clean npm cache
+  npm/install                         Install npm
+  npm/install-global                  Set npm global for current user
+  npm/outdated                        List outdated packages
+  npm/update                          Update packages to the latest version
+  npm/update-path                     Update PATH for npm global
+  npm/version                         Display npm version
+  nvm/install                         Install nvm
+  nvm/list-versions                   List installed Node.js versions
+  nvm/use                             Use a specific Node.js version
+  pnpm/audit                          Run security audit with pnpm
+  pnpm/clean-cache                    Clean pnpm cache
+  pnpm/install                        Install pnpm
+  pnpm/outdated                       List outdated packages with pnpm
+  pnpm/update                         Update packages to the latest version with pnpm
+  pnpm/version                        Display pnpm version
   pre-commit/hooks/install            Install pre-commit hooks
   pre-commit/init                     Initialize .pre-commit-config.yaml to working directoy
   pre-commit/install                  Install pre-commit using Pip3
@@ -55,13 +165,83 @@ Available targets:
   pre-commit/run                      Execute pre-commit hooks on all files
   pre-commit/update                   Update pre-commit-config.yaml with the latest version
   pre-commit/version                  Display pre-commit version
+  python/format                       Format code
   python/install                      Install Python 3
+  python/install/VERSION              Install specific Python version
+  python/lint                         Run linter
   python/pip/install                  Install Python 3 Pip
+  python/pipenv/init                  Initialize a Pipenv project
+  python/pipenv/install               Install Pipenv
+  python/poetry/add                   Add a dependency with Poetry
+  python/poetry/add/dev               Add a development dependency with Poetry
+  python/poetry/init                  Initialize a Poetry project
+  python/poetry/install               Install Poetry
+  python/requirements/generate        Generate requirements.txt
+  python/requirements/install         Install from requirements.txt
+  python/requirements/update          Update dependencies
+  python/run                          Run Python script
+  python/setup/dev                    Set up development environment
+  python/setup/pipenv                 Set up Pipenv development environment
+  python/setup/poetry                 Set up Poetry development environment
+  python/test                         Run tests
+  python/test/coverage                Run tests with coverage
   python/version                      Display Python & Pip version
   python/virtualenv/init              Initialize a Python 3 virtualenv in the current directory
   python/virtualenv/install           Install Python 3 virtualenv
   python/virtualenv/remove            Remove Python 3 virtualenv in the current directory
-  ubuntu/install-packages             Install most common packages
+  terraform-docs/build                Build doc/terraform-docs.md with Terraform Docs
+  terraform-docs/install              Install terraform-docs
+  terraform-docs/version              Display Terraform Docs version
+  terraform/apply                     Build or change infrastructure
+  terraform/apply/%                   Build or change infrastructure for specific environment
+  terraform/clean                     Remove temporary files and directories
+  terraform/cloud/login               Login to Terraform Cloud
+  terraform/cloud/logout              Logout from Terraform Cloud
+  terraform/destroy                   Destroy Terraform-managed infrastructure
+  terraform/destroy/%                 Destroy Terraform-managed infrastructure for specific environment
+  terraform/fmt                       Format Terraform configuration files
+  terraform/gitignore/init            Initialize gitignore for Terraform
+  terraform/init                      Initialize a new or existing Terraform working directory
+  terraform/init/backend              Initialize with backend config
+  terraform/install                   Install Terraform
+  terraform/install/VERSION           Install specific Terraform version
+  terraform/module/get                Get modules
+  terraform/module/update             Update modules
+  terraform/plan                      Generate an execution plan
+  terraform/plan/%                    Generate an execution plan for specific environment
+  terraform/pre-commit/init           Initialize pre-commit config for Terraform
+  terraform/state/list                List resources in the state
+  terraform/state/mv                  Move an item in the state
+  terraform/state/pull                Pull current state
+  terraform/state/push                Push state
+  terraform/state/rm                  Remove items from the state
+  terraform/validate                  Validate the configuration files
+  terraform/version                   Display Terraform version
+  terraform/workspace/delete          Delete a workspace
+  terraform/workspace/list            List workspaces
+  terraform/workspace/new             Create a new workspace
+  terraform/workspace/select          Select a workspace
+  terrascan/install                   Install terrascan
+  terrascan/run                       Run Terrascan
+  terrascan/version                   Display Terrascan version
+  tflint/init                         Init AWS TFLINT
+  tflint/init/force                   Init AWS TFLINT, overwrites the current configuration
+  tflint/install                      Install TFLINT
+  tflint/run                          Run TFLINT
+  tflint/version                      Display TFLINT version
+  tfsec/install                       Install TFSEC
+  tfsec/run                           Run TFSEC
+  tfsec/version                       Display TFSEC version
+  tfswitch/install                    Install tfswitch
+  tfswitch/run                        Execute tfswitch
+  tfswitch/version                    Display tfswitch version
+  ubuntu/install                      Install most common packages
   ubuntu/update                       Update and upgrade Ubuntu packages
+  yarn/audit                          Run security audit with Yarn
+  yarn/clean-cache                    Clean Yarn cache
+  yarn/install                        Install Yarn
+  yarn/outdated                       List outdated packages with Yarn
+  yarn/update                         Update packages to the latest version with Yarn
+  yarn/version                        Display Yarn version
 
 ```
