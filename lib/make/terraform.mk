@@ -15,6 +15,15 @@
 #   make terraform/destroy         # Destroy infrastructure
 #
 # For more information, run: make terraform/help
+#
+# LICENSE NOTE:
+# Terraform 1.5.7 was the last release under the Mozilla Public License
+# (MPL 2.0). Starting with 1.6.0, HashiCorp re-licensed Terraform under
+# the Business Source License (BSL). The default TERRAFORM_VERSION below
+# points at a BSL-era release. If your organization requires an OSS-only
+# (MPL) toolchain, override TERRAFORM_VERSION=1.5.7 or migrate to a
+# fork such as OpenTofu.
+# See: https://www.hashicorp.com/license-faq
 #####################################################################
 
 # Detect OS for cross-platform compatibility
@@ -35,7 +44,8 @@ ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
 endif
 
 # Default Terraform version
-TERRAFORM_VERSION ?= 1.5.7
+# NOTE: 1.5.7 was the last MPL-licensed release. 1.6+ is BSL. See header.
+TERRAFORM_VERSION ?= 1.9.8
 
 #####################################################################
 # Help
@@ -191,24 +201,28 @@ terraform/plan/%: tfswitch/run terraform/fmt terraform/validate
 .PHONY: terraform/apply
 ## Build or change infrastructure
 terraform/apply: tfswitch/run terraform/fmt terraform/validate
+	$(call confirm,terraform/apply will modify infrastructure with -auto-approve)
 	terraform apply -auto-approve
 
 .PHONY: terraform/apply/dev terraform/apply/staging terraform/apply/prod
 ## Build or change infrastructure for specific environment
 terraform/apply/%: tfswitch/run terraform/fmt terraform/validate
 	$(eval ENV := $(word 2,$(subst /, ,$@)))
+	$(call confirm,terraform/apply will modify $(ENV) infrastructure with -auto-approve)
 	@echo "Applying changes for $(ENV) environment..."
 	terraform apply -auto-approve -var-file="environments/$(ENV).tfvars"
 
 .PHONY: terraform/destroy
 ## Destroy Terraform-managed infrastructure
 terraform/destroy: tfswitch/run terraform/fmt terraform/validate
+	$(call confirm,terraform/destroy will PERMANENTLY DESTROY all infrastructure)
 	terraform destroy -auto-approve
 
 .PHONY: terraform/destroy/dev terraform/destroy/staging terraform/destroy/prod
 ## Destroy Terraform-managed infrastructure for specific environment
 terraform/destroy/%: tfswitch/run terraform/fmt terraform/validate
 	$(eval ENV := $(word 2,$(subst /, ,$@)))
+	$(call confirm,terraform/destroy will PERMANENTLY DESTROY $(ENV) infrastructure)
 	@echo "Destroying infrastructure for $(ENV) environment..."
 	terraform destroy -auto-approve -var-file="environments/$(ENV).tfvars"
 

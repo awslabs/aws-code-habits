@@ -16,7 +16,7 @@
 #####################################################################
 
 # Default CDK version
-CDK_VERSION ?= 2.96.2
+CDK_VERSION ?= 2.257.0
 
 # Default CDK directory (can be overridden)
 CDK_DIR ?= .
@@ -103,6 +103,7 @@ aws/cdk/bootstrap:
 .PHONY: aws/cdk/destroy-bootstrap
 ## Destroy CDK bootstrap resources
 aws/cdk/destroy-bootstrap:
+	$(call confirm,aws/cdk/destroy-bootstrap will delete the CDKToolkit stack — make absolutely sure no stacks depend on it)
 	aws cloudformation delete-stack --stack-name CDKToolkit
 
 #####################################################################
@@ -134,12 +135,14 @@ aws/cdk/deploy/%:
 .PHONY: aws/cdk/destroy
 ## Destroy CDK stack
 aws/cdk/destroy:
+	$(call confirm,aws/cdk/destroy will destroy CDK stack $(STACK_NAME) with --force)
 	cd $(CDK_DIR) && npx cdk destroy $(STACK_NAME) --force
 
 .PHONY: aws/cdk/destroy/STACK
 ## Destroy specific stack
 aws/cdk/destroy/%:
 	$(eval STACK := $(word 2,$(subst /, ,$@)))
+	$(call confirm,aws/cdk/destroy will destroy CDK stack $* with --force)
 	@echo "Destroying stack $(STACK)..."
 	cd $(CDK_DIR) && npx cdk destroy $(STACK) --force
 
@@ -165,6 +168,7 @@ aws/cdk/deploy/all:
 .PHONY: aws/cdk/destroy/all
 ## Destroy all stacks
 aws/cdk/destroy/all:
+	$(call confirm,aws/cdk/destroy/all will destroy ALL CDK stacks with --force)
 	cd $(CDK_DIR) && npx cdk destroy --all --force
 
 #####################################################################
