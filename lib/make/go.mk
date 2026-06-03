@@ -33,7 +33,7 @@ ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
 endif
 
 # Default Go version
-GO_VERSION ?= 1.21.0
+GO_VERSION ?= 1.23.12
 
 # Default output directory
 OUTPUT_DIR ?= build
