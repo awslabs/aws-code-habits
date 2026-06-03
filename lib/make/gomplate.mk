@@ -6,7 +6,7 @@ GOMPLATE_VERSION?=3.10.0
 .PHONY: gomplate/install
 gomplate/install:
 	@mkdir -p /tmp/download \
-	&& wget https://github.com/hairyhenderson/gomplate/releases/download/v$(GOMPLATE_VERSION)/gomplate_linux-amd64-slim -O /tmp/download/gomplate --quiet --no-check-certificate \
+	&& wget --https-only --quiet https://github.com/hairyhenderson/gomplate/releases/download/v$(GOMPLATE_VERSION)/gomplate_linux-amd64-slim -O /tmp/download/gomplate \
 	&& chmod +x /tmp/download/gomplate \
 	&& sudo mv /tmp/download/gomplate /usr/local/bin/ \
 	&& rm -rf /tmp/download
