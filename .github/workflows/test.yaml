@@ -13,7 +13,7 @@ jobs:
   habits:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Habits Install
         run: make habits/install
@@ -32,7 +32,7 @@ jobs:
   checkov:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Checkov Install
         run: make checkov/install
@@ -42,7 +42,7 @@ jobs:
   cobra:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Cobra Install
         run: make go/install cobra/install
@@ -52,7 +52,7 @@ jobs:
   go:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Go Install
         run: make go/install
@@ -62,7 +62,7 @@ jobs:
   gomplate:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Gomplate Install
         run: make gomplate/install
@@ -72,7 +72,7 @@ jobs:
   nodejs:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: NodeJS Install
         run: make nodejs/install
@@ -82,7 +82,7 @@ jobs:
   npm:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: NPM Install
         run: make npm/install
@@ -92,7 +92,7 @@ jobs:
   nuke:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Nuke Install
         run: make nuke/install
@@ -102,7 +102,7 @@ jobs:
   pre-commit:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Pre-Commit Install
         run: make pre-commit/install
@@ -112,7 +112,7 @@ jobs:
   prettier:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Setup NPM Global
         run: make npm/install-global npm/update-path
@@ -125,7 +125,7 @@ jobs:
   terraform:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Terraform Install
         run: make terraform/install
@@ -135,7 +135,7 @@ jobs:
   terraform-docs:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Terraform-Docs Install
         run: make terraform-docs/install
@@ -145,7 +145,7 @@ jobs:
   terrascan:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Terrascan Install
         run: make terrascan/install
@@ -155,7 +155,7 @@ jobs:
   tflint:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: TFLint Install
         run: make tflint/install
@@ -165,7 +165,7 @@ jobs:
   tfsec:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Tfsec Install
         run: make tfsec/install
@@ -175,7 +175,7 @@ jobs:
   tfswitch:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Tfswitch Install
         run: make tfswitch/install
@@ -185,7 +185,7 @@ jobs:
   ubuntu:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Ubuntu version
         run: make ubuntu/version
