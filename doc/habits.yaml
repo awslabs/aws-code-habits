@@ -36,6 +36,22 @@ overview: |-
 
   You add the library to a project as a Git submodule (or as a vendored copy) and include its Make targets from your own `Makefile`. It is intended for teams that want a shared, version-controlled set of development commands across many repositories.
 
+  The following diagram shows how your project consumes the library:
+
+  ```mermaid
+  flowchart LR
+      project["Your project"]
+      makefile["Your Makefile<br/>includes lib/make/*/*.mk<br/>and lib/make/*.mk"]
+      targets["make targets<br/>(terraform/plan, python/test, doc/build)"]
+      tools["Tools<br/>(Terraform, AWS CDK, Python, Node.js, Go)"]
+      ansible["Ansible playbooks<br/>(lib/ansible/)"]
+
+      project --> makefile
+      makefile -->|include .mk glob| targets
+      targets -->|run a tool directly| tools
+      targets -->|multi-step actions| ansible
+  ```
+
 features:
   - Run common tasks through consistent `make` targets across repositories.
   - Install and pin developer tools (Terraform, AWS CDK, Python, Node.js, Go, and more) through dedicated targets.
@@ -290,6 +306,24 @@ how_it_works: |-
   You include the library's `.mk` files from your `Makefile`. Each `.mk` file under `lib/make/` defines targets for one tool or technology. Targets that perform multi-step actions, such as `doc/build` and `doc/init`, delegate to Ansible playbooks under `lib/ansible/`.
 
   `README.md` is generated. The `doc/build` target runs an Ansible playbook that renders the Jinja template `lib/ansible/templates/readme.j2` using the data in `doc/habits.yaml`, then writes the result to `README.md`.
+
+  The following diagram shows the documentation render pipeline:
+
+  ```mermaid
+  flowchart LR
+      cmd["make doc/build"]
+      target["doc/build target<br/>(lib/make/doc.mk)"]
+      playbook["Ansible playbook<br/>(lib/ansible/playbooks/doc/build.yaml)"]
+      data["doc/habits.yaml<br/>(source data)"]
+      template["readme.j2<br/>(lib/ansible/templates/)"]
+      readme["README.md<br/>(generated)"]
+
+      cmd --> target
+      target --> playbook
+      data --> playbook
+      template --> playbook
+      playbook -->|render| readme
+  ```
 
 contributing: |-
   See [Contributing](CONTRIBUTING.md).
