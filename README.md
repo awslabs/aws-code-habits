@@ -9,104 +9,140 @@
 
 ![logo][logo]
 
-
 [![Test](https://github.com/awslabs/aws-code-habits/actions/workflows/test.yaml/badge.svg)](https://github.com/awslabs/aws-code-habits/actions/workflows/test.yaml)[![GitHub Issues](https://img.shields.io/github/issues/awslabs/aws-code-habits)](https://github.com/awslabs/aws-code-habits/issues)[![GitHub Stars](https://img.shields.io/github/stars/awslabs/aws-code-habits)](https://github.com/awslabs/aws-code-habits/stargazers)[![hygiene](https://github.com/awslabs/aws-code-habits/actions/workflows/hygiene.yaml/badge.svg)](https://github.com/awslabs/aws-code-habits/actions/workflows/hygiene.yaml)
 
 # AWS Code Habits
 
-A library with Make targets, Ansible playbooks, Jinja templates (and more) designed to boost common software development tasks and enhance governance.
+A library of Make targets, Ansible playbooks, and Jinja templates that you add to a project as a Git submodule to standardize common development tasks.
 
 | ![screenshot-1](https://user-images.githubusercontent.com/3298422/198290134-fec4a14d-8542-4b92-9cbc-d33f476e7a74.gif) |
-|:--:|
-| *Installing AWS Code Habits* |
+| :-------------------------------------------------------------------------------------------------------------------: |
+|                                                _Installing AWS Code Habits_                                           |
 
+## Overview
 
-## Table of Contents
+AWS Code Habits is a reusable library you embed in your own repository. It groups everyday development tasks behind consistent `make` targets so that every contributor runs the same commands to install tools, format code, run linters, manage infrastructure, and generate documentation.
 
-- [Getting Started](#getting-started)
+The library has three parts:
 
-- [Prerequisites](#prerequisites)
+- **Make targets** under `lib/make/` provide the commands you run, such as `terraform/plan`, `python/test`, and `doc/build`.
+- **Ansible playbooks** under `lib/ansible/` perform multi-step actions, such as scaffolding `.github/` directories and rendering the README.
+- **Jinja templates** render files such as `README.md` from data in `doc/habits.yaml`.
 
+You add the library to a project as a Git submodule (or as a vendored copy) and include its Make targets from your own `Makefile`. It is intended for teams that want a shared, version-controlled set of development commands across many repositories.
 
-- [Usage](#usage)
+The following diagram shows how your project consumes the library:
 
-- [How-Tos](#how-tos)
-  - [How to initialize pre-commit config](#how-to-initialize-pre-commit-config)
-  - [How to maintain documentation](#how-to-maintain-documentation)
-  - [How to expand Habits commands](#how-to-expand-habits-commands)
-  - [How to use technology-specific Makefiles](#how-to-use-technology-specific-makefiles)
+```mermaid
+flowchart LR
+    project["Your project"]
+    makefile["Your Makefile<br/>includes lib/make/*/*.mk<br/>and lib/make/*.mk"]
+    targets["make targets<br/>(terraform/plan, python/test, doc/build)"]
+    tools["Tools<br/>(Terraform, AWS CDK, Python, Node.js, Go)"]
+    ansible["Ansible playbooks<br/>(lib/ansible/)"]
 
-- [Testing](#testing)
+    project --> makefile
+    makefile -->|include .mk glob| targets
+    targets -->|run a tool directly| tools
+    targets -->|multi-step actions| ansible
+```
 
+## Features
 
-## Getting Started
+- Run common tasks through consistent `make` targets across repositories.
+- Install and pin developer tools (Terraform, AWS CDK, Python, Node.js, Go, and more) through dedicated targets.
+- Generate `README.md` from a single source file, `doc/habits.yaml`.
+- Scaffold project files: `.gitignore`, pre-commit configuration, and `.github/` directories for actions, workflows, issues, and pull requests.
+- Gate destructive targets behind a confirmation prompt and verify downloaded binaries with optional SHA256 checks. See [docs/HARDENING.md](docs/HARDENING.md).
 
-AWS Code Habits was developed to be used as a [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+## Prerequisites
 
-On a terminal, on your project's root directory, execute one of the following commands:
+The library supports Linux, macOS, and Windows (with some limitations). Many targets include cross-platform detection and use the appropriate installation method for the host.
+
+You need the following installed before you use the library:
+
+- [Python 3](https://www.python.org) — used by several targets and by the documentation tooling.
+- [pip](https://pypi.org/project/pip/) — the Python package installer.
+- [GNU Make](https://www.gnu.org/software/make/) — runs the targets the library defines.
+
+## Installation
+
+You use AWS Code Habits as a [Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). From the root directory of your project, run:
 
 ```bash
 git submodule add --name habits -b main https://github.com/awslabs/aws-code-habits.git habits
 ```
 
-This clones AWS Code Habits into a folder named `habits` tracking the `main` branch.
+This clones the library into a `habits/` directory that tracks the `main` branch.
 
-> **Pin to a release.** Tracking `main` exposes you to silent breakage. After
-> adding the submodule, check out a tagged release (or a specific commit SHA)
-> and commit the resulting `.gitmodules` / submodule pointer:
->
-> ```bash
-> git -C habits fetch --tags
-> git -C habits checkout v1.5.0   # or any tag from CHANGELOG.md
-> git add habits && git commit -m "chore: pin habits to v1.5.0"
-> ```
->
-> See [CHANGELOG.md](CHANGELOG.md) for available releases. To bump later,
-> repeat the `checkout` step against a newer tag.
-
-Now, you will need to create, or add to your existing, `Makefile`.
+Pin the submodule to a release. Tracking `main` exposes you to unannounced changes. After you add the submodule, check out a tagged release (or a specific commit SHA) and commit the resulting submodule pointer:
 
 ```bash
-export WORKSPACE=$(shell pwd)
-export HABITS = $(WORKSPACE)/habits
-
-include $(WORKSPACE)/tools.env # pin the version of your tools
-
-include $(HABITS)/lib/make/*/*.mk
-include $(HABITS)/lib/make/*.mk
+git -C habits fetch --tags
+git -C habits checkout v1.5.0   # or any tag from CHANGELOG.md
+git add habits && git commit -m "chore: pin habits to v1.5.0"
 ```
 
-Remember, next time you need to clone your repository, you will need to include `--recurse-submodules` parameters.
+See [CHANGELOG.md](CHANGELOG.md) for available releases. To move to a newer release later, repeat the `checkout` step against a newer tag.
+
+When you next clone your repository, pass `--recurse-submodules` so the submodule is fetched:
+
 ```bash
-git clone --recurse-submodules ...
+git clone --recurse-submodules <your-repository-url>
 ```
-> If you already cloned the project and forgot `--recurse-submodules`, you can combine the `git submodule init` and `git submodule update` steps by running `git submodule update --init`. To also initialize, fetch and checkout any nested submodules, you can use the foolproof `git submodule update --init --recursive`. - [Git Tools Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 
-Check the [scripts](scripts/) directory, if you want to automate the initialization and installation of AWS Code Habits.`
+If you already cloned the repository without `--recurse-submodules`, initialize and fetch the submodule with:
 
+```bash
+git submodule update --init --recursive
+```
 
-## Prerequisites
-  A list of things you need, or how to install them.
-> AWS Code Habits now supports multiple platforms including Linux, macOS, and Windows (with some limitations). Many Makefiles include cross-platform detection and appropriate installation methods.
+To automate the installation steps, use the helper scripts in the [scripts/](scripts/) directory.
 
-- [Python 3](https://www.python.org) - Whether you're new to programming or an experienced developer, it's easy to learn and use Python.
-- [Pip](https://pypi.org/project/pip/) - pip is the package installer for Python.
-- [GNU Make](https://www.gnu.org/software/make/) - GNU Make is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
+## Getting started
 
+1. Add the submodule with the command in [Installation](#installation).
 
+2. Create a `Makefile` in your project root (or add these lines to an existing one):
+
+   ```makefile
+   export WORKSPACE = $(shell pwd)
+   export HABITS = $(WORKSPACE)/habits
+
+   include $(WORKSPACE)/tools.env # pin the version of your tools
+
+   include $(HABITS)/lib/make/*/*.mk
+   include $(HABITS)/lib/make/*.mk
+   ```
+
+3. List the available targets:
+
+   ```bash
+   make help
+   ```
+
+   You see a list of targets with one-line descriptions:
+
+   ```text
+   Available targets:
+
+     doc/build                           Builds documentation
+     doc/init                            Initialize documentation
+     habits/check                        Performs checks
+     ...
+   ```
 
 ## Usage
 
-```bash
-make [tab][tab]
-```
+List every target with the default `help` target:
 
 ```bash
 make help
 ```
-For more information about each [Make targets available](Makefile.md).
 
-Each technology-specific Makefile includes its own help target. For example:
+For the full target reference, see [Makefile.md](Makefile.md).
+
+Several technology-specific Makefiles add their own help target:
 
 ```bash
 make terraform/help
@@ -116,55 +152,48 @@ make go/help
 make gitignore/help
 ```
 
-### Safety & supply chain
+### Initialize pre-commit configuration
 
-Habits ships with safety guards and supply-chain knobs you should know about:
+Create a `.pre-commit-config.yaml` in your working directory:
 
-- **Destructive targets are gated.** `terraform/apply`, `terraform/destroy`, `aws/cdk/destroy*`, `nuke/run`, and `docker/remove-*` prompt for `yes` before running. Set `CONFIRM=yes` to skip the prompt in CI.
-- **Tool downloads can be checksum-verified.** Set `TFLINT_SHA256`, `TERRASCAN_SHA256` (and other `*_SHA256` variables) in your `tools.env` to enforce SHA256 verification on installed binaries. If unset, install proceeds with a clear warning.
-- **Tool versions are overridable.** Every `*_VERSION` variable uses `?=`, so define your own in `tools.env` to pin specific releases.
-
-See [docs/HARDENING.md](docs/HARDENING.md) for the full list of safety variables and recommended values.
-
-## How-Tos
-Below you can learn
-
-### How to initialize pre-commit config
 ```bash
 make pre-commit/init
 ```
 
-To run all `pre-commit` rules in all files, simply run:
+Run all pre-commit hooks against every file:
 
 ```bash
 make pre-commit/run
 ```
 
-### How to maintain documentation
-1. First initialize all documentation files:
-```bash
-make doc/init
-```
+### Maintain documentation
 
-This will create a folder named `doc/` in the root directory of your project and create a file named `habits.yaml` inside of it.
+1. Initialize the documentation files. This creates a `doc/` directory containing `habits.yaml`:
 
-2. Modify the contents of `doc/habits.yaml` accordingly and execute:
+   ```bash
+   make doc/init
+   ```
 
-```
-make doc/build
-```
+2. Edit `doc/habits.yaml`, then rebuild the README:
 
-3. `README.md` will be rendered.
+   ```bash
+   make doc/build
+   ```
 
-### How to expand Habits commands
-You can use [Habits][habits] to meet your needs, in your `Makefile` you can add the following to ensure code and documentation hygiene:
-```bash
+`README.md` is rendered from `doc/habits.yaml`. Do not edit `README.md` by hand — your changes are overwritten on the next `make doc/build`.
+
+### Compose your own targets
+
+Add aggregate targets to your `Makefile` that call library targets. For example, to combine documentation and pre-commit checks:
+
+```makefile
 .PHONY: hygiene
 hygiene: doc/build pre-commit/run
 ```
 
-Another example, if you want to perform several tasks with `AWS CloudFormation`:
-```bash
+To drive an AWS CloudFormation workflow:
+
+```makefile
 .PHONY: hygiene
 hygiene: aws/cloudformation/hygiene
 
@@ -178,143 +207,135 @@ discard: aws/cloudformation/delete-change-set
 apply: aws/cloudformation/execute-change-set
 ```
 
-### How to use technology-specific Makefiles
-AWS Code Habits includes several technology-specific Makefiles that provide targets for common development tasks:
+### Use technology-specific targets
 
-### Terraform
+Each technology groups its targets under a common prefix.
+
+Terraform:
+
 ```bash
-# Install Terraform
 make terraform/install
-
-# Initialize Terraform
 make terraform/init
-
-# Plan changes
 make terraform/plan
-
-# Apply changes
 make terraform/apply
-
-# Manage workspaces
 make terraform/workspace/list
 make terraform/workspace/new WORKSPACE_NAME=dev
 ```
 
-### AWS CDK
+AWS Cloud Development Kit (AWS CDK):
+
 ```bash
-# Install AWS CDK
 make aws/cdk/install
-
-# Bootstrap CDK environment
 make aws/cdk/bootstrap
-
-# Deploy CDK stack
 make aws/cdk/deploy
-
-# Synthesize CloudFormation template
 make aws/cdk/synth
 ```
 
-### Python
+Python:
+
 ```bash
-# Install Python
 make python/install
-
-# Initialize virtual environment
 make python/virtualenv/init
-
-# Set up Poetry
 make python/poetry/install
 make python/poetry/init
-
-# Run tests
 make python/test
 ```
 
-### Node.js
-```bash
-# Install Node.js
-make nodejs/install
+Node.js:
 
-# Initialize projects
+```bash
+make nodejs/install
 make nodejs/init/express
 make nodejs/init/react
 make nodejs/init/vue
-
-# Package management
 make nodejs/add PACKAGE=express
 make nodejs/add/dev PACKAGE=jest
 ```
 
-### Go
+Go:
+
 ```bash
-# Install Go
 make go/install
-
-# Build application
 make go/app/build OUTPUT=myapp
-
-# Run tests
 make go/app/test
 ```
 
-### Gitignore
+Gitignore:
+
 ```bash
-# Initialize gitignore for specific project types
 make gitignore/init/web
 make gitignore/init/python
 make gitignore/init/node
 ```
 
+### Run checks
 
-## Testing
-To perform habits checks:
+Verify that a project has the files the library expects:
+
 ```bash
 make habits/check
 ```
 
-Each technology-specific Makefile includes its own testing targets. For example:
+Run technology-specific tests:
 
 ```bash
-# Run Python tests
 make python/test
 make python/test/coverage
-
-# Run Node.js tests
 make nodejs/test
-
-# Run Go tests
 make go/app/test
 make go/app/test/coverage
 ```
 
+## Configuration
 
+You configure the library through environment files that your `Makefile` includes and through variables you pass on the command line.
 
-## References
-- [GNU Make](https://www.gnu.org/software/make/) - GNU Make is a tool which controls the generation of executables and other non-source files of a program from the program's source files.
-- [Windows Subsystem for Linux (Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/install) - WSL enables you to use Linux tools, like Bash or Grep, completely integrated with Windows tools, like PowerShell or Visual Studio Code, with no need to dual-boot.
-- [Visual Studio Code](https://code.visualstudio.com/) - Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications.
-- [VSCode Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) - An extension pack that lets you open any folder in a container, on a remote machine, or in WSL and take advantage of VS Code's full feature set.
-- [Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) - Submodules allow you to keep a Git repository as a subdirectory of another Git repository.
-- [Docker](https://www.docker.com/products/docker-desktop/) - The fastest way to containerize applications
-- [Visual Studio DevContainers](https://code.visualstudio.com/docs/devcontainers/containers) - The Visual Studio Code Dev Containers extension lets you use a Docker container as a full-featured development environment.
-- [Ansible](https://www.ansible.com/) - Ansible is an open source community project sponsored by Red Hat, it's the simplest way to automate IT.
-- [Jinja2](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html) - Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts.
-- [Terraform](https://www.terraform.io/) - Terraform is an infrastructure as code tool that lets you build, change, and version infrastructure safely and efficiently.
-- [AWS CDK](https://aws.amazon.com/cdk/) - The AWS Cloud Development Kit (AWS CDK) is an open-source software development framework to define cloud infrastructure in code and provision it through AWS CloudFormation.
-- [Python](https://www.python.org/) - Python is a programming language that lets you work quickly and integrate systems more effectively.
-- [Node.js](https://nodejs.org/) - Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine.
-- [Go](https://golang.org/) - Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.
+- `tools.env` — pins tool versions. Every `*_VERSION` variable uses `?=`, so a value you set in `tools.env` overrides the default.
+- `*_SHA256` variables — when set, the matching tool installer verifies the downloaded archive with `sha256sum -c` and aborts on mismatch. When unset, the installer prints a warning and proceeds.
+- `CONFIRM` — set `CONFIRM=yes` to skip the confirmation prompt on destructive targets, for example in continuous integration.
 
+Destructive targets are gated behind a confirmation prompt: `terraform/apply`, `terraform/destroy`, `aws/cdk/destroy*`, `nuke/run`, `docker/remove-images`, `docker/remove-volumes`, and `docker/prune`. For the full list of safety variables and recommended values, see [docs/HARDENING.md](docs/HARDENING.md).
+
+## How it works
+
+You include the library's `.mk` files from your `Makefile`. Each `.mk` file under `lib/make/` defines targets for one tool or technology. Targets that perform multi-step actions, such as `doc/build` and `doc/init`, delegate to Ansible playbooks under `lib/ansible/`.
+
+`README.md` is generated. The `doc/build` target runs an Ansible playbook that renders the Jinja template `lib/ansible/templates/readme.j2` using the data in `doc/habits.yaml`, then writes the result to `README.md`.
+
+The following diagram shows the documentation render pipeline:
+
+```mermaid
+flowchart LR
+    cmd["make doc/build"]
+    target["doc/build target<br/>(lib/make/doc.mk)"]
+    playbook["Ansible playbook<br/>(lib/ansible/playbooks/doc/build.yaml)"]
+    data["doc/habits.yaml<br/>(source data)"]
+    template["readme.j2<br/>(lib/ansible/templates/)"]
+    readme["README.md<br/>(generated)"]
+
+    cmd --> target
+    target --> playbook
+    data --> playbook
+    template --> playbook
+    playbook -->|render| readme
+```
+
+## Contributing
+
+See [Contributing](CONTRIBUTING.md).
+
+## Security
+
+See [Security](SECURITY.md) to report a vulnerability. Do not file public GitHub issues for security reports.
 
 ## License
+
 This project is licensed under the MIT-0 License. See the [LICENSE](LICENSE) file.
 
 ## Copyright
-Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
+Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 [repo]: https://github.com/awslabs/aws-code-habits
 [logo]: doc/logo.png
-
 [habits]: https://github.com/awslabs/aws-code-habits
