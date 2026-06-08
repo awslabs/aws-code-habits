@@ -29,119 +29,92 @@
 {% endfor %}
 {% endif %}
 
-## Table of Contents
+{% if overview is defined %}
+## Overview
 
-{% if getting_started is defined %}
-- [Getting Started](#getting-started)
+{{ overview }}
+
 {% endif %}
+{% if features is defined %}
+## Features
 
-{% if prerequisites is defined %}
-- [Prerequisites](#prerequisites)
-{% endif %}
-
-{% if installation is defined %}
-- [Installation](#installation)
-{% endif %}
-
-{% if usage is defined %}
-- [Usage](#usage)
-{% endif %}
-
-{% if how_tos is defined %}
-- [How-Tos](#how-tos)
-{% for how_to in how_tos %}
-  - [{{ how_to.title }}](#{{ how_to.title | lower | replace(" ", "-") | indent(width=4) }})
+{% for feature in features %}
+- {{ feature }}
 {% endfor %}
-{% endif %}
-
-{% if testing is defined %}
-- [Testing](#testing)
-{% endif %}
-
-{% if deployment is defined %}
-- [Deployment](#deployment)
-{% endif %}
-
-{% if getting_started is defined %}
-## Getting Started
-
-{{ getting_started }}
 
 {% endif %}
-
-## Prerequisites
-  {{ prerequisites.content }}
-
 {% if prerequisites is defined %}
+## Prerequisites
+
+{{ prerequisites.content }}
+
 {% if prerequisites.references is defined %}
 {% for reference in prerequisites.references %}
 - [{{ reference.name }}]({{ reference.url }}) - {{ reference.description }}
 {% endfor %}
+
 {% endif %}
 {% endif %}
-
-
 {% if installation is defined %}
 ## Installation
+
 {{ installation }}
 
 {% endif %}
+{% if getting_started is defined %}
+## Getting started
 
+{{ getting_started }}
+
+{% endif %}
+{% if usage is defined %}
 ## Usage
+
 {{ usage }}
 
-{% if how_tos is defined %}
-## How-Tos
-Below you can learn
-
-{% for how_to in how_tos %}
-### {{ how_to.title }}
-{{ how_to.content }}
-
-{% endfor %}
 {% endif %}
+{% if configuration is defined %}
+## Configuration
 
-{% if testing is defined %}
-## Testing
-{{ testing }}
-{% endif %}
-
-{% if deployment is defined %}
-## Deployment
-{{ deployment }}
-{% endif %}
-
-{% if contacts is defined %}
-## Contact
-{% for contact in contacts %}
-- [{{ contact.name }}](mailto:{{ contact.email }})
-{% endfor %}
+{{ configuration }}
 
 {% endif %}
+{% if how_it_works is defined %}
+## How it works
 
-{% if references is defined %}
-## References
-{% for reference in references %}
-- [{{ reference.name  }}]({{ reference.url }}) - {{ reference.description }}
-{% endfor %}
+{{ how_it_works }}
+
 {% endif %}
+{% if contributing is defined %}
+## Contributing
 
+{{ contributing }}
 
+{% endif %}
+{% if security is defined %}
+## Security
+
+{{ security }}
+
+{% endif %}
 {% if license is defined %}
 ## License
-This project is licensed under the {{ license }} License. See the [LICENSE](LICENSE) file.
-{% endif %}
 
+This project is licensed under the {{ license }} License. See the [LICENSE](LICENSE) file.
+
+{% endif %}
 {% if copyright is defined %}
 ## Copyright
-{{ copyright }}
-{% endif %}
 
+{{ copyright }}
+
+{% endif %}
 {% if trademark is defined and trademark == "yes" %}
 ## Trademarks
-All other trademarks referenced herein are the property of their respective owners.
-{% endif %}
 
+All other trademarks referenced herein are the property of their respective owners.
+
+{% endif %}
 [repo]: {{ url }}
 [logo]: {{ logo }}
 
